@@ -1,0 +1,9 @@
+<!doctype html>
+<html>
+<head>
+<title> report</title>
+</head>
+<body>
+Predicted Price: {{ "${:,.2f}".format(PredPrice) }}
+</body>
+<html>

@@ -1,0 +1,95 @@
+---
+title: "House Price and Components Report"
+author: 
+  name: "Carsten Lange"
+  affiliation: "California State Polytechnic University, Pomona"
+  email: CLange@cpp.edu
+number-sections: true
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    embed-resources: true
+    smart: false
+execute:
+  message: false
+  warning: false
+---
+
+---
+title: "Housing 2025"
+author: "Carsten Lange"
+affiliation: "California State Polytechnic University, Pomona"
+date: today
+number-sections: true
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    embed-resources: true
+---
+
+**Disclaimer:** This is research in progress. Estimates are based on data from 2024 adjusted to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions because they are based on only few observable variables. Individual house prperties are not observable through a computer estimate and they are therefor not considered.
+
+## Introduction
+
+Only houses below $2,000,000 were considered becasue higher priced houses crucially depend on individual properties that are not obsevable with out a house inspection.
+
+## Summary/Predicted Price:
+
+The house properties and the neighborhood you chose results in an estimated price of:
+
+**Predicted Price:** ${{ PredPrice | comma_format }}\
+**Avg. Price in LA County:**  ${{ SHAPBaseValue | comma_format }}\
+**Control Avg Price:** ${{ AvgPrice | comma_format }}
+
+
+
+
+## Chosen House Properties with Premiums and Discounts
+
+Since Sqft and the number of Bedrooms are closly related only their joint impact can be quantified.
+ A so called Principal Component Analysis was used the quantify their joined **total impact** on the house price.
+
+In many (but not all) cases one of the principa components represesets the **Scale:**, the "bigness" of the house while the other principal componente represents the **Layout (ratio between sqft and bedrooms)**. 
+
+
+### Chosen Values
+
+You have chosen a house with the following properties:
+
+**Sqft:** {{ Sqft | comma_format }}\
+**Avg. in LA County:**  {{ AvgSqft  | comma_format }}
+
+**Number of Bedrooms:** {{ Bedrooms }}\
+**Avg. in LA County:** {{ AvgBedrooms  | comma_format }}
+
+### Premium (+)/Discount (-)
+
+The **total Premium (+)/Discount (-)** is: ${{ SHAPPCA1PCA2 | comma_format }}
+
+The first principal component (**Scale**) contributes ${{ SHAPPCA1 | comma_format }} while the second principal component  (**Layout**) contributes ${{ SHAPPCA2 | comma_format }}.
+
+## Chosen Neighborhood Properties with Premiums and Discounts
+
+In several aspect the chosen neighborhood is superior or inferior compared to the average of LA County. This results in a *Premium (+)*/*Discount (-)*
+
+### Drive Time to the Next Beach in Minutes
+
+**Drive time from the selected neighborhood to the beach:** {{ BeachTime  | comma_format }} Min.\
+**Avg. in LA County (geom.):**  {{ GeoAvgBeachTime  | comma_format }} Min.\
+**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPBeachTimeLN | comma_format }}
+
+### School Quality Index (2400 -- 2800 in LA County)
+
+**School Quality Index for the selected neighborhood:** {{ SchoolQuality  | comma_format }}\
+**Avg. in LA County:**  {{ AvgSchoolQuality  | comma_format }}\
+**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPSchoolQuality | comma_format }}
+
+### Median Income
+**Median Income for the selected neighborhood:** {{ MedIncome  | comma_format }}\
+**Avg. in LA County:**  {{ AvgMedIncome  | comma_format }}\
+**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPMedIncome | comma_format }}
+
+
+

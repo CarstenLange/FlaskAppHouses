@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select House Features</title>
+</head>
+<body>
+    <h2>Select House Specifications</h2>
+    <form method="GET" action="">
+        {% for key, val in existing_params.items() %}
+            <input type="hidden" name="{{ key }}" value="{{ val }}">
+        {% endfor %}
+
+        <label for="Sqft">Square Footage:</label>
+        <select name="Sqft" id="Sqft">
+            {% for size in SqftChoices %}
+                <option value="{{ size }}">{{ size }} Sqft</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="Bedrooms">Bedrooms:</label>
+        <select name="Bedrooms" id="Bedrooms">
+            {% for num in BedroomChoices %}
+                <option value="{{ num }}">{{ num }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <button type="submit">Submit Specifications</button>
+    </form>
+</body>
+</html>
