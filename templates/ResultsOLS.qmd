@@ -80,10 +80,10 @@ In several aspect the chosen neighborhood is superior or inferior compared to th
 **Avg. in LA County (geom.):**  {{ GeoAvgBeachTime  | comma_format }} Min.\
 **Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPBeachTimeLN | comma_format }}
 
-### School Quality Index (2400 -- 2800 in LA County)
+### School Quality Index 0 (worst) -- 100 (best)
 
-**School Quality Index for the selected neighborhood:** {{ SchoolQuality  | comma_format }}\
-**Avg. in LA County:**  {{ AvgSchoolQuality  | comma_format }}\
+**School Quality Index for the selected neighborhood:** {{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | comma_format }}\
+**Avg. in LA County:**  {{ (((AvgSchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | comma_format }}\
 **Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPSchoolQuality | comma_format }}
 
 ### Median Income
@@ -100,6 +100,12 @@ In several aspect the chosen neighborhood is superior or inferior compared to th
 **Crimes per Square Mile (2024) for the selected neighborhood:** {{ CrimesPerSqMile  | comma_format }}\
 **Avg. in LA County:**  {{ AvgCrimesPerSqMile  | comma_format }}\
 **Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPCrimesPerSqMile | comma_format }}
+
+### Distance to the Closest Major Park 
+**Distance to Park from the selected neighborhood:** {{ (DistParksMeters * 0.000621371) | comma_format }} miles\
+**Avg. in LA County:**  {{ (AvgDistParksMeters  * 0.000621371) | comma_format }} miles\
+**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPDistParksMeters  | comma_format }}
+
 
 
 

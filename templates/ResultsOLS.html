@@ -2183,10 +2183,11 @@ vertical-align: -.125em;
   <li><a href="#chosen-neighborhood-properties-with-premiums-and-discounts" id="toc-chosen-neighborhood-properties-with-premiums-and-discounts" class="nav-link" data-scroll-target="#chosen-neighborhood-properties-with-premiums-and-discounts"><span class="header-section-number">4</span> Chosen Neighborhood Properties with Premiums and Discounts</a>
   <ul class="collapse">
   <li><a href="#drive-time-to-the-next-beach-in-minutes" id="toc-drive-time-to-the-next-beach-in-minutes" class="nav-link" data-scroll-target="#drive-time-to-the-next-beach-in-minutes"><span class="header-section-number">4.1</span> Drive Time to the Next Beach in Minutes</a></li>
-  <li><a href="#school-quality-index-2400-2800-in-la-county" id="toc-school-quality-index-2400-2800-in-la-county" class="nav-link" data-scroll-target="#school-quality-index-2400-2800-in-la-county"><span class="header-section-number">4.2</span> School Quality Index (2400 – 2800 in LA County)</a></li>
+  <li><a href="#school-quality-index-0-worst-100-best" id="toc-school-quality-index-0-worst-100-best" class="nav-link" data-scroll-target="#school-quality-index-0-worst-100-best"><span class="header-section-number">4.2</span> School Quality Index 0 (worst) – 100 (best)</a></li>
   <li><a href="#median-income" id="toc-median-income" class="nav-link" data-scroll-target="#median-income"><span class="header-section-number">4.3</span> Median Income</a></li>
   <li><a href="#restaurants-per-square-mile" id="toc-restaurants-per-square-mile" class="nav-link" data-scroll-target="#restaurants-per-square-mile"><span class="header-section-number">4.4</span> Restaurants per Square Mile</a></li>
   <li><a href="#crimes-per-square-mile" id="toc-crimes-per-square-mile" class="nav-link" data-scroll-target="#crimes-per-square-mile"><span class="header-section-number">4.5</span> Crimes per Square Mile</a></li>
+  <li><a href="#distance-to-the-closest-major-park" id="toc-distance-to-the-closest-major-park" class="nav-link" data-scroll-target="#distance-to-the-closest-major-park"><span class="header-section-number">4.6</span> Distance to the Closest Major Park</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -2270,10 +2271,10 @@ vertical-align: -.125em;
 <strong>Avg. in LA County (geom.):</strong> {{ GeoAvgBeachTime | comma_format }} Min.<br>
 <strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> ${{ SHAPBeachTimeLN | comma_format }}</p>
 </section>
-<section id="school-quality-index-2400-2800-in-la-county" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="school-quality-index-2400-2800-in-la-county"><span class="header-section-number">4.2</span> School Quality Index (2400 – 2800 in LA County)</h3>
-<p><strong>School Quality Index for the selected neighborhood:</strong> {{ SchoolQuality | comma_format }}<br>
-<strong>Avg. in LA County:</strong> {{ AvgSchoolQuality | comma_format }}<br>
+<section id="school-quality-index-0-worst-100-best" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="school-quality-index-0-worst-100-best"><span class="header-section-number">4.2</span> School Quality Index 0 (worst) – 100 (best)</h3>
+<p><strong>School Quality Index for the selected neighborhood:</strong> {{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | comma_format }}<br>
+<strong>Avg. in LA County:</strong> {{ (((AvgSchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | comma_format }}<br>
 <strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> ${{ SHAPSchoolQuality | comma_format }}</p>
 </section>
 <section id="median-income" class="level3" data-number="4.3">
@@ -2293,6 +2294,12 @@ vertical-align: -.125em;
 <p><strong>Crimes per Square Mile (2024) for the selected neighborhood:</strong> {{ CrimesPerSqMile | comma_format }}<br>
 <strong>Avg. in LA County:</strong> {{ AvgCrimesPerSqMile | comma_format }}<br>
 <strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> ${{ SHAPCrimesPerSqMile | comma_format }}</p>
+</section>
+<section id="distance-to-the-closest-major-park" class="level3" data-number="4.6">
+<h3 data-number="4.6" class="anchored" data-anchor-id="distance-to-the-closest-major-park"><span class="header-section-number">4.6</span> Distance to the Closest Major Park</h3>
+<p><strong>Distance to Park from the selected neighborhood:</strong> {{ (DistParksMeters * 0.000621371) | comma_format }} miles<br>
+<strong>Avg. in LA County:</strong> {{ (AvgDistParksMeters * 0.000621371) | comma_format }} miles<br>
+<strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> ${{ SHAPDistParksMeters | comma_format }}</p>
 </section>
 </section>
 

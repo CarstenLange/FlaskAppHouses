@@ -43,17 +43,17 @@ def FctSHAPResults():
    
     # Use .get() matching the exact keys in your URL string.
     # We cast to float() so they are ready for numerical analysis.
-    DictParams["Price"] = float(DictParams.get("Price", 1000000))
-    DictParams["Sqft"] = float(DictParams.get("Sqft", 2500))
-    DictParams["Bedrooms"] = float(DictParams.get("Bedrooms", 3))    
-    DictParams["BeachTime"] = float(DictParams.get("BeachTime", 47.8))
-    DictParams["BeachTimeLN"] = math.log(DictParams["BeachTime"])
-    DictParams["SchoolQuality"] = float(DictParams.get("SchoolQuality", 2678))
-    DictParams["MedIncome"] = float(DictParams.get("MedIncome", 115461))
-    DictParams["CrimesPerSqMile"] = float(DictParams.get("CrimesPerSqMile", 2.599))
-    DictParams["DistParksMeters"] = float(DictParams.get("DistParksMeters", 9229))
-    DictParams["DistParksMetersLN"] = math.log(DictParams["DistParksMeters"])
-    DictParams["RestaurantsPerSqMile"] = float(DictParams.get("RestaurantsPerSqMile", 0.349))
+    DictParams["Price"] = float(DictParams.get("Price", 8888888))
+    DictParams["Sqft"] = float(DictParams.get("Sqft", 8888888))
+    DictParams["Bedrooms"] = float(DictParams.get("Bedrooms", 8888888))    
+    DictParams["BeachTime"] = float(DictParams.get("BeachTime", 8888888))
+    DictParams["BeachTimeLN"] = math.log(DictParams["BeachTime"], 8888888)
+    DictParams["SchoolQuality"] = float(DictParams.get("SchoolQuality", 8888888))
+    DictParams["MedIncome"] = float(DictParams.get("MedIncome", 8888888))
+    DictParams["CrimesPerSqMile"] = float(DictParams.get("CrimesPerSqMile", 8888888))
+    DictParams["DistParksMeters"] = float(DictParams.get("DistParksMeters", 8888888))
+    DictParams["DistParksMetersLN"] = math.log(DictParams["DistParksMeters"], 8888888)
+    DictParams["RestaurantsPerSqMile"] = float(DictParams.get("RestaurantsPerSqMile", 8888888))
 
     FctScaler=joblib.load("FctScaler.joblib")
     FctPCA=joblib.load("FctPCA.joblib")
@@ -119,6 +119,7 @@ def FctSHAPResults():
         BeachTime=math.exp(DictParams["BeachTimeLN"]),
         RestaurantsPerSqMile=DictParams["RestaurantsPerSqMile"],
         CrimesPerSqMile=DictParams["CrimesPerSqMile"],
+        DistParksMeters=DictParams["DistParksMeters"],
         SHAPBaseValue=float(SHAPValuesUser.base_values[0]),
         SHAPPCA1=SHAPPCA1,
         SHAPPCA2=SHAPPCA2,
@@ -128,6 +129,7 @@ def FctSHAPResults():
         SHAPMedIncome=SHAPValuesUserDict.get("MedIncome", 99999999),
         SHAPRestaurantsPerSqMile=SHAPValuesUserDict.get("RestaurantsPerSqMile", 99999999),
         SHAPCrimesPerSqMile=SHAPValuesUserDict.get("CrimesPerSqMile", 99999999),
+        SHAPDistParksMeters=SHAPValuesUserDict.get("DistParksMetersLN", 99999999),
         AvgPrice=y_train.mean(),
         AvgSqft=X_train["Sqft"].mean(),                                              
         AvgBedrooms=X_train["Bedrooms"].mean(),
@@ -136,6 +138,7 @@ def FctSHAPResults():
         AvgMedIncome=X_train["MedIncome"].mean(),
         AvgRestaurantsPerSqMile=X_train["RestaurantsPerSqMile"].mean(),
         AvgCrimesPerSqMile=X_train["CrimesPerSqMile"].mean(),
+        AvgDistParksMeters=X_train["DistParksMeters"].mean(),
 
                                               
 
