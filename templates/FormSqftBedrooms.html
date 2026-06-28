@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2>Select House Specifications</h2>
-    <form method="GET" action="">
+    <form method="GET" action="/EnterHouseVars">
         {% for key, val in existing_params.items() %}
             <input type="hidden" name="{{ key }}" value="{{ val }}">
         {% endfor %}

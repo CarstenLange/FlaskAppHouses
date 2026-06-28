@@ -4,6 +4,7 @@ import pandas as pd
 import joblib
 from sklearn.model_selection import train_test_split
 
+
 app = Flask(__name__)
 
 @app.template_filter('comma_format')
@@ -54,8 +55,8 @@ def FctSHAPResults():
     DictParams["DistParksMetersLN"] = math.log(DictParams["DistParksMeters"])
     DictParams["RestaurantsPerSqMile"] = float(DictParams.get("RestaurantsPerSqMile", 0.349))
 
-    FctScaler=joblib.load("../FctScaler.joblib")
-    FctPCA=joblib.load("../FctPCA.joblib")
+    FctScaler=joblib.load("FctScaler.joblib")
+    FctPCA=joblib.load("FctPCA.joblib")
     DataUserOrg=pd.DataFrame([DictParams])
     
     # 1. Define the exact order of features your model was trained on.
@@ -87,15 +88,14 @@ def FctSHAPResults():
 
 
     # 3. Load Explainer and Compute SHAP Values
-    ExplainerOLSWithPCAs = joblib.load("../ExplainerOLSWithPCAs.joblib")
+    ExplainerOLSWithPCAs = joblib.load("ExplainerOLSWithPCAs.joblib")
     SHAPValuesUser=ExplainerOLSWithPCAs(DataUserFinal)
     SHAPValuesUserDict = dict(zip(FeatureOrderTrain, SHAPValuesUser.values[0]))
 
     # Prepare and Render to template
 
-    from sklearn.model_selection import train_test_split
-
-    DataAnalysis = pd.read_csv("../DataAnalysis.csv").drop(columns=['SqftxBedrooms'])
+    
+    DataAnalysis = pd.read_csv("DataAnalysis.csv").drop(columns=['SqftxBedrooms'])
   
     X_train, _, y_train, _ = train_test_split(
         DataAnalysis.drop(columns=['Price']),  # Features (X)
