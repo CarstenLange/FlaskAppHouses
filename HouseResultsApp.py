@@ -25,7 +25,7 @@ def choose_features():
         return redirect(url_for('FctSHAPResults', **existing_params))
     
     # Step 1: Otherwise, generate choices and show the user the form
-    SqftChoices = list(range(500, 4501, 500))
+    SqftChoices = list(range(1000, 4501, 200))
     BedroomChoices = list(range(1, 7))
     
     # Render using the standalone template file from the templates folder
@@ -117,6 +117,8 @@ def FctSHAPResults():
         SchoolQuality=DictParams["SchoolQuality"],
         MedIncome=DictParams["MedIncome"],
         BeachTime=math.exp(DictParams["BeachTimeLN"]),
+        RestaurantsPerSqMile=DictParams["RestaurantsPerSqMile"],
+        CrimesPerSqMile=DictParams["CrimesPerSqMile"],
         SHAPBaseValue=float(SHAPValuesUser.base_values[0]),
         SHAPPCA1=SHAPPCA1,
         SHAPPCA2=SHAPPCA2,
@@ -124,12 +126,16 @@ def FctSHAPResults():
         SHAPBeachTimeLN=SHAPValuesUserDict.get("BeachTimeLN", 99999999),
         SHAPSchoolQuality=SHAPValuesUserDict.get("SchoolQuality", 99999999),
         SHAPMedIncome=SHAPValuesUserDict.get("MedIncome", 99999999),
+        SHAPRestaurantsPerSqMile=SHAPValuesUserDict.get("RestaurantsPerSqMile", 99999999),
+        SHAPCrimesPerSqMile=SHAPValuesUserDict.get("CrimesPerSqMile", 99999999),
         AvgPrice=y_train.mean(),
         AvgSqft=X_train["Sqft"].mean(),                                              
         AvgBedrooms=X_train["Bedrooms"].mean(),
         GeoAvgBeachTime=math.exp(X_train["BeachTimeLN"].mean()),
         AvgSchoolQuality=X_train["SchoolQuality"].mean(),
         AvgMedIncome=X_train["MedIncome"].mean(),
+        AvgRestaurantsPerSqMile=X_train["RestaurantsPerSqMile"].mean(),
+        AvgCrimesPerSqMile=X_train["CrimesPerSqMile"].mean(),
 
                                               
 

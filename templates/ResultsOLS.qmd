@@ -91,5 +91,15 @@ In several aspect the chosen neighborhood is superior or inferior compared to th
 **Avg. in LA County:**  {{ AvgMedIncome  | comma_format }}\
 **Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPMedIncome | comma_format }}
 
+### Restaurants per Square Mile
+**Restaurants per Square Mile (2024) for the selected neighborhood:** {{ RestaurantsPerSqMile  | comma_format }}\
+**Avg. in LA County:**  {{ AvgRestaurantsPerSqMile  | comma_format }}\
+**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPRestaurantsPerSqMile | comma_format }}
+
+### Crimes per Square Mile
+**Crimes per Square Mile (2024) for the selected neighborhood:** {{ CrimesPerSqMile  | comma_format }}\
+**Avg. in LA County:**  {{ AvgCrimesPerSqMile  | comma_format }}\
+**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPCrimesPerSqMile | comma_format }}
+
 
 

@@ -6,6 +6,10 @@
 </head>
 <body>
     <h2>Select House Specifications</h2>
+
+    Please enter the square-fottage and the number of bedrooms in the form below
+    and then hit the <it>Submit Specifications</it> button to generate the rort for the chosen house in the previously chosen neighborhood.
+
     <form method="GET" action="/EnterHouseVars">
         {% for key, val in existing_params.items() %}
             <input type="hidden" name="{{ key }}" value="{{ val }}">
