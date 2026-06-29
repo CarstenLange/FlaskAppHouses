@@ -39,7 +39,7 @@ def choose_features():
 
 
 def FctSHAPResults():
-    MarketMultiplier=1
+    MarketMultiplier=1.0069 #Case Schiller LXXRSA 6/24 - 3/26: 1+(442.34623-439.30455)/439.30455=1.0069
     # request.args.to_dict() extracts incoming parameters as strings
     DictParams = request.args.to_dict()
 
