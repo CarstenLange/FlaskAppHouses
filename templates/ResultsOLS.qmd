@@ -93,7 +93,7 @@ In several aspect the chosen neighborhood is superior or inferior compared to th
 ### Distance to the Closest Major Park 
 **Distance to Park from the selected neighborhood:** {{ (DistParksMeters * 0.000621371) | comma_format }} miles\
 **Avg. in LA County:**  {{ (AvgDistParksMeters  * 0.000621371) | comma_format }} miles\
-**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPDistParksMeters  | comma_format }}
+**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPDistParksMetersLN  | comma_format }}
 
 
 

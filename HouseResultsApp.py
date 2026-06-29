@@ -36,7 +36,10 @@ def choose_features():
     
 
 @app.route("/SHAPResults")
+
+
 def FctSHAPResults():
+    MarketMultiplier=1
     # request.args.to_dict() extracts incoming parameters as strings
     DictParams = request.args.to_dict()
 
@@ -104,13 +107,13 @@ def FctSHAPResults():
         stratify=pd.qcut(DataAnalysis['Price'], q=5, labels=False)
     )
 
-    SHAPPCA1=SHAPValuesUserDict.get("PCA1", 99999999)
-    SHAPPCA2=SHAPValuesUserDict.get("PCA2", 99999999)
+    SHAPPCA1=MarketMultiplier*SHAPValuesUserDict.get("PCA1", 99999999)
+    SHAPPCA2=MarketMultiplier*SHAPValuesUserDict.get("PCA2", 99999999)
     SHAPPCA1PCA2 = SHAPPCA1 +SHAPPCA2
 
 
     return render_template("ResultsOLS.html", 
-        PredPrice=float(ExplainerOLSWithPCAs.model.predict(DataUserFinal)[0]), 
+        PredPrice=MarketMultiplier*float(ExplainerOLSWithPCAs.model.predict(DataUserFinal)[0]), 
         Sqft=DictParams["Sqft"],
         Bedrooms=DictParams["Bedrooms"],
         SchoolQuality=DictParams["SchoolQuality"],
@@ -119,17 +122,17 @@ def FctSHAPResults():
         RestaurantsPerSqMile=DictParams["RestaurantsPerSqMile"],
         CrimesPerSqMile=DictParams["CrimesPerSqMile"],
         DistParksMeters=DictParams["DistParksMeters"],
-        SHAPBaseValue=float(SHAPValuesUser.base_values[0]),
-        SHAPPCA1=SHAPPCA1,
-        SHAPPCA2=SHAPPCA2,
-        SHAPPCA1PCA2=SHAPPCA1PCA2,
-        SHAPBeachTimeLN=SHAPValuesUserDict.get("BeachTimeLN", 99999999),
-        SHAPSchoolQuality=SHAPValuesUserDict.get("SchoolQuality", 99999999),
-        SHAPMedIncome=SHAPValuesUserDict.get("MedIncome", 99999999),
-        SHAPRestaurantsPerSqMile=SHAPValuesUserDict.get("RestaurantsPerSqMile", 99999999),
-        SHAPCrimesPerSqMile=SHAPValuesUserDict.get("CrimesPerSqMile", 99999999),
-        SHAPDistParksMeters=SHAPValuesUserDict.get("DistParksMetersLN", 99999999),
-        AvgPrice=y_train.mean(),
+        SHAPBaseValue=MarketMultiplier*float(SHAPValuesUser.base_values[0]),
+        SHAPPCA1=MarketMultiplier*SHAPPCA1,
+        SHAPPCA2=MarketMultiplier*SHAPPCA2,
+        SHAPPCA1PCA2=MarketMultiplier*SHAPPCA1PCA2,
+        SHAPBeachTimeLN=MarketMultiplier*SHAPValuesUserDict.get("BeachTimeLN", 99999999),
+        SHAPSchoolQuality=MarketMultiplier*SHAPValuesUserDict.get("SchoolQuality", 99999999),
+        SHAPMedIncome=MarketMultiplier*SHAPValuesUserDict.get("MedIncome", 99999999),
+        SHAPRestaurantsPerSqMile=MarketMultiplier*SHAPValuesUserDict.get("RestaurantsPerSqMile", 99999999),
+        SHAPCrimesPerSqMile=MarketMultiplier*SHAPValuesUserDict.get("CrimesPerSqMile", 99999999),
+        SHAPDistParksMetersLN=MarketMultiplier*SHAPValuesUserDict.get("DistParksMetersLN", 99999999),
+        AvgPrice=MarketMultiplier*y_train.mean(),
         AvgSqft=X_train["Sqft"].mean(),                                              
         AvgBedrooms=X_train["Bedrooms"].mean(),
         GeoAvgBeachTime=math.exp(X_train["BeachTimeLN"].mean()),
