@@ -1,5 +1,5 @@
 ---
-title: "House Price and Components Report"
+title: "House Price Prediction and Estimates for Contributing Components"
 author: 
   name: "Carsten Lange"
   affiliation: "California State Polytechnic University, Pomona"
@@ -16,24 +16,13 @@ execute:
   warning: false
 ---
 
----
-title: "Housing 2025"
-author: "Carsten Lange"
-affiliation: "California State Polytechnic University, Pomona"
-date: today
-number-sections: true
-format:
-  html:
-    toc: true
-    toc-depth: 3
-    embed-resources: true
----
 
-**Disclaimer:** This is research in progress. Estimates are based on data from 2024 adjusted to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions because they are based on only few observable variables. Individual house prperties are not observable through a computer estimate and they are therefor not considered.
+
+**Disclaimer:** This is research in progress. Estimates are based on data from 2024 adjusted to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions because they are based on only few observable variables. Individual house prperties are not observable through a computer estimate and they are therefor not considered (todo: check crimes)
 
 ## Introduction
 
-Only houses below $2,000,000 were considered becasue higher priced houses crucially depend on individual properties that are not obsevable with out a house inspection.
+Only houses below $3,000,000 were considered because higher priced houses crucially depend on individual properties that are not obsevable with out a house inspection. This means that predictions for high price houses are less relaible. (todo: check Crime)
 
 ## Summary/Predicted Price:
 
