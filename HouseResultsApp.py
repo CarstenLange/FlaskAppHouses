@@ -123,9 +123,9 @@ def FctSHAPResults():
         CrimesPerSqMile=DictParams["CrimesPerSqMile"],
         DistParksMeters=DictParams["DistParksMeters"],
         SHAPBaseValue=MarketMultiplier*float(SHAPValuesUser.base_values[0]),
-        SHAPPCA1=MarketMultiplier*SHAPPCA1,
-        SHAPPCA2=MarketMultiplier*SHAPPCA2,
-        SHAPPCA1PCA2=MarketMultiplier*SHAPPCA1PCA2,
+        SHAPPCA1=SHAPPCA1,
+        SHAPPCA2=SHAPPCA2,
+        SHAPPCA1PCA2=SHAPPCA1PCA2,
         SHAPBeachTimeLN=MarketMultiplier*SHAPValuesUserDict.get("BeachTimeLN", 99999999),
         SHAPSchoolQuality=MarketMultiplier*SHAPValuesUserDict.get("SchoolQuality", 99999999),
         SHAPMedIncome=MarketMultiplier*SHAPValuesUserDict.get("MedIncome", 99999999),
@@ -149,4 +149,3 @@ def FctSHAPResults():
 
 if __name__ == "__main__":
      app.run(host="0.0.0.0", port=7860)
-#    app.run(debug=True)
