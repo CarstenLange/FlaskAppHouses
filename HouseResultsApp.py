@@ -7,6 +7,10 @@ from sklearn.model_selection import train_test_split
 
 app = Flask(__name__)
 
+@app.route("/")
+def home():
+    return redirect(url_for("choose_features"))
+
 @app.template_filter('comma_format')
 def comma_format(value):
     try:
