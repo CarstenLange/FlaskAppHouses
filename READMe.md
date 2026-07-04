@@ -1,12 +1,3 @@
----
-title: HouseResultsApp
-emoji: 🏠
-colorFrom: indigo
-colorTo: pink
-sdk: docker
-app_port: 7860
-pinned: false
-license: apache-2.0
-short_description: Est. Prices
----
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:7aca502f7b244ae783ee437c090f541ae901f86a5180253afc22e3f029a0ecee
+size 168

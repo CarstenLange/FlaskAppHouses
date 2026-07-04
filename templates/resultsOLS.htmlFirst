@@ -1,9 +1,3 @@
-<!doctype html>
-<html>
-<head>
-<title> report</title>
-</head>
-<body>
-Predicted Price: {{ "${:,.2f}".format(PredPrice) }}
-</body>
-<html>
+version https://git-lfs.github.com/spec/v1
+oid sha256:e3a0653726737e91ad757ea9ccf7eb90fd4aef17a65421e525a59beefbc63fee
+size 134
