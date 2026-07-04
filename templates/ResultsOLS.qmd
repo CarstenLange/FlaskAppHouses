@@ -18,7 +18,11 @@ execute:
 
 
 
-**Disclaimer:** This is research in progress. Estimates are based on data from 2024 adjusted to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions because they are based on only few observable variables. Individual house prperties are not observable through a computer estimate and they are therefor not considered (todo: check crimes)
+::: {.callout-note appearance="simple" icon=false}
+<span style="font-size: 0.85em;">
+**Disclaimer:** This is research in progress. Estimates are based on data from 2024 adjusted to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions because they are based on only few observable variables. Individual house prperties are not observable through a computer estimate and they are therefor not considered.
+</span>
+:::
 
 ## Introduction
 
