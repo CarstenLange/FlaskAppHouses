@@ -94,7 +94,7 @@ def FctSHAPResults():
 
 
     # 3. Load Explainer and Compute SHAP Values
-    ExplainerOLSWithPCAs = joblib.load("ExplainerOLSWithPCAs.joblib")
+    ExplainerOLSWithPCAs = joblib.load("ExplainerTreeBasWithPCAs.joblib")
     SHAPValuesUser=ExplainerOLSWithPCAs(DataUserFinal)
     SHAPValuesUserDict = dict(zip(FeatureOrderTrain, SHAPValuesUser.values[0]))
 
@@ -145,11 +145,9 @@ def FctSHAPResults():
         AvgRestaurantsPerSqMile=X_train["RestaurantsPerSqMile"].mean(),
         AvgCrimesPerSqMile=X_train["CrimesPerSqMile"].mean(),
         AvgDistParksMeters=X_train["DistParksMeters"].mean(),
-
-                                              
-
-)
-
+    )
 
 if __name__ == "__main__":
-     app.run(host="0.0.0.0", port=7860)
+    app.run(host="127.0.0.1", port=7860, debug=True) #local server
+    #app.run(host="0.0.0.0", port=7860) #hugging face server
+
