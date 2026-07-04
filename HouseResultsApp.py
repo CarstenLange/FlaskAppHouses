@@ -94,8 +94,8 @@ def FctSHAPResults():
 
 
     # 3. Load Explainer and Compute SHAP Values
-    ExplainerOLSWithPCAs = joblib.load("ExplainerTreeBasWithPCAs.joblib")
-    SHAPValuesUser=ExplainerOLSWithPCAs(DataUserFinal)
+    ExplainerWithPCAs = joblib.load("ExplainerTreeBasWithPCAs.joblib")
+    SHAPValuesUser=ExplainerWithPCAs(DataUserFinal)
     SHAPValuesUserDict = dict(zip(FeatureOrderTrain, SHAPValuesUser.values[0]))
 
     # Prepare and Render to template
@@ -117,7 +117,7 @@ def FctSHAPResults():
 
 
     return render_template("ResultsOLS.html", 
-        PredPrice=MarketMultiplier*float(ExplainerOLSWithPCAs.model.predict(DataUserFinal)[0]), 
+        PredPrice=MarketMultiplier*float(ExplainerWithPCAs.model.predict(DataUserFinal)[0]), 
         Sqft=DictParams["Sqft"],
         Bedrooms=DictParams["Bedrooms"],
         SchoolQuality=DictParams["SchoolQuality"],
@@ -148,6 +148,6 @@ def FctSHAPResults():
     )
 
 if __name__ == "__main__":
-    #app.run(host="127.0.0.1", port=7860, debug=True) #local server
-    app.run(host="0.0.0.0", port=7860) #hugging face server
+    app.run(host="127.0.0.1", port=7860, debug=True) #local server
+    #app.run(host="0.0.0.0", port=7860) #hugging face server
 
