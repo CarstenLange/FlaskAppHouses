@@ -2173,9 +2173,23 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#at-a-glance" id="toc-at-a-glance" class="nav-link active" data-scroll-target="#at-a-glance"><span class="header-section-number">1</span> At a Glance</a></li>
-  <li><a href="#detailed-report" id="toc-detailed-report" class="nav-link" data-scroll-target="#detailed-report"><span class="header-section-number">2</span> Detailed Report</a></li>
-  <li><a href="#acknowlegements" id="toc-acknowlegements" class="nav-link" data-scroll-target="#acknowlegements"><span class="header-section-number">3</span> Acknowlegements</a></li>
+  <li><a href="#summarypredicted-price" id="toc-summarypredicted-price" class="nav-link active" data-scroll-target="#summarypredicted-price"><span class="header-section-number">1</span> Summary/Predicted Price:</a></li>
+  <li><a href="#chosen-house-properties-with-premiums-and-discounts" id="toc-chosen-house-properties-with-premiums-and-discounts" class="nav-link" data-scroll-target="#chosen-house-properties-with-premiums-and-discounts"><span class="header-section-number">2</span> Chosen House Properties with Premiums and Discounts</a>
+  <ul class="collapse">
+  <li><a href="#chosen-values" id="toc-chosen-values" class="nav-link" data-scroll-target="#chosen-values"><span class="header-section-number">2.1</span> Chosen Values</a></li>
+  <li><a href="#premium-discount--" id="toc-premium-discount--" class="nav-link" data-scroll-target="#premium-discount--"><span class="header-section-number">2.2</span> Premium (+)/Discount (-)</a></li>
+  </ul></li>
+  <li><a href="#chosen-neighborhood-properties-with-premiums-and-discounts" id="toc-chosen-neighborhood-properties-with-premiums-and-discounts" class="nav-link" data-scroll-target="#chosen-neighborhood-properties-with-premiums-and-discounts"><span class="header-section-number">3</span> Chosen Neighborhood Properties with Premiums and Discounts</a>
+  <ul class="collapse">
+  <li><a href="#drive-time-to-the-next-beach-in-minutes" id="toc-drive-time-to-the-next-beach-in-minutes" class="nav-link" data-scroll-target="#drive-time-to-the-next-beach-in-minutes"><span class="header-section-number">3.1</span> Drive Time to the Next Beach in Minutes</a></li>
+  <li><a href="#school-quality-index-0-worst-100-best" id="toc-school-quality-index-0-worst-100-best" class="nav-link" data-scroll-target="#school-quality-index-0-worst-100-best"><span class="header-section-number">3.2</span> School Quality Index 0 (worst) – 100 (best)</a></li>
+  <li><a href="#median-income" id="toc-median-income" class="nav-link" data-scroll-target="#median-income"><span class="header-section-number">3.3</span> Median Income</a></li>
+  <li><a href="#restaurants-per-square-mile" id="toc-restaurants-per-square-mile" class="nav-link" data-scroll-target="#restaurants-per-square-mile"><span class="header-section-number">3.4</span> Restaurants per Square Mile</a></li>
+  <li><a href="#crimes-per-square-mile" id="toc-crimes-per-square-mile" class="nav-link" data-scroll-target="#crimes-per-square-mile"><span class="header-section-number">3.5</span> Crimes per Square Mile</a></li>
+  <li><a href="#distance-to-the-closest-major-park" id="toc-distance-to-the-closest-major-park" class="nav-link" data-scroll-target="#distance-to-the-closest-major-park"><span class="header-section-number">3.6</span> Distance to the Closest Major Park</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">4</span> Summary</a></li>
+  <li><a href="#acknowlegements" id="toc-acknowlegements" class="nav-link" data-scroll-target="#acknowlegements"><span class="header-section-number">5</span> Acknowlegements</a></li>
   </ul>
 </nav>
 </div>
@@ -2223,8 +2237,8 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<section id="at-a-glance" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="at-a-glance"><span class="header-section-number">1</span> At a Glance</h2>
+<section id="summarypredicted-price" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="summarypredicted-price"><span class="header-section-number">1</span> Summary/Predicted Price:</h2>
 <p>The house properties and the neighborhood you chose results in an estimated price of:</p>
 <table class="table table-bordered table-striped caption-top">
 <thead>
@@ -2239,15 +2253,15 @@ vertical-align: -.125em;
 <td style="text-align: right;"><strong>Premium(+)/Discount</strong></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>House Scale/Layout</strong> (Bedrooms: {{ Bedrooms }}, Sqft: {{ Sqft | digit0_format }})</td>
+<td style="text-align: left;"><strong>House Scale/Layout</strong> (Bedrooms: {{ Bedrooms }}, Sqft: {{ Sqft | comma_format }})</td>
 <td style="text-align: right;">{{ SHAPPCA1PCA2 | currency_format }}</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>Beach Drive Time</strong> ({{ BeachTime | digit0_format }} Min.)</td>
+<td style="text-align: left;"><strong>Beach Drive Time</strong> ({{ BeachTime | comma_format }} Min.)</td>
 <td style="text-align: right;">{{ SHAPBeachTimeLN | currency_format }}</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>School Quality Index</strong> ({{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }} of 100)</td>
+<td style="text-align: left;"><strong>School Quality Index</strong> ({{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | comma_format }} of 100)</td>
 <td style="text-align: right;">{{ SHAPSchoolQuality | currency_format }}</td>
 </tr>
 <tr class="odd">
@@ -2255,165 +2269,75 @@ vertical-align: -.125em;
 <td style="text-align: right;">{{ SHAPMedIncome | currency_format }}}</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Restaurants per Square Mile</strong> ({{ RestaurantsPerSqMile | digit2_format }} per Sq. Mile in Neighborhood)</td>
+<td style="text-align: left;"><strong>Restaurants per Square Mile</strong> ({{ RestaurantsPerSqMile | comma_format }} per Sq. Mile in Neighborhood)</td>
 <td style="text-align: right;">{{ SHAPRestaurantsPerSqMile | currency_format }}</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><strong>Crimes per Square Mile</strong> ({{ CrimesPerSqMile | digit2_format }} per Sq. Mile in Neighborhood)</td>
-<td style="text-align: right;">{{ SHAPCrimesPerSqMile | currency_format }}</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><strong>Distance to the Closest Major Park</strong> ({{ (DistParksMeters * 0.000621371) | digit0_format }} miles)</td>
-<td style="text-align: right;">{{ SHAPDistParksMetersLN | currency_format }}</td>
-</tr>
-<tr class="odd">
-<th style="text-align: right;" data-quarto-table-cell-role="th"><strong>Predicted Price:</strong></th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">{{ PredPrice | currency_format }}</th>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="detailed-report" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="detailed-report"><span class="header-section-number">2</span> Detailed Report</h2>
-<p>The detailed report features will be fianlized soon and they are currently in the stae of <em>work in progress</em>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>House Scale and Layout
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+<section id="chosen-house-properties-with-premiums-and-discounts" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="chosen-house-properties-with-premiums-and-discounts"><span class="header-section-number">2</span> Chosen House Properties with Premiums and Discounts</h2>
 <p>Since Sqft and the number of Bedrooms are closly related only their joint impact can be quantified. A so called Principal Component Analysis was used the quantify their joined <strong>total impact</strong> on the house price.</p>
 <p>In many (but not all) cases one of the principa components represesets the <strong>Scale:</strong>, the “bigness” of the house while the other principal componente represents the <strong>Layout (ratio between sqft and bedrooms)</strong>.</p>
+<section id="chosen-values" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="chosen-values"><span class="header-section-number">2.1</span> Chosen Values</h3>
 <p>You have chosen a house with the following properties:</p>
-<p><strong>Sqft:</strong> {{ Sqft | digit0_format }}<br>
-<strong>Avg. in LA County:</strong> {{ AvgSqft | digit0_format }}</p>
+<p><strong>Sqft:</strong> {{ Sqft | comma_format }}<br>
+<strong>Avg. in LA County:</strong> {{ AvgSqft | comma_format }}</p>
 <p><strong>Number of Bedrooms:</strong> {{ Bedrooms }}<br>
-<strong>Avg. in LA County:</strong> {{ AvgBedrooms | digit0_format }}</p>
-<section id="premium-discount--" class="level4" data-number="2.0.1">
-<h4 data-number="2.0.1" class="anchored" data-anchor-id="premium-discount--"><span class="header-section-number">2.0.1</span> Premium (+)/Discount (-)</h4>
+<strong>Avg. in LA County:</strong> {{ AvgBedrooms | comma_format }}</p>
+</section>
+<section id="premium-discount--" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="premium-discount--"><span class="header-section-number">2.2</span> Premium (+)/Discount (-)</h3>
 <p>The <strong>total Premium (+)/Discount (-)</strong> is: {{ SHAPPCA1PCA2 | currency_format }}</p>
 <p>The first principal component (<strong>Scale</strong>) contributes {{ SHAPPCA1 | currency_format }} while the second principal component (<strong>Layout</strong>) contributes {{ SHAPPCA2 | currency_format }}.</p>
 </section>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Drive Time to the Next Beach in Minutes
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Drive time from the selected neighborhood to the beach:</strong> {{ BeachTime | digit0_format }} Min.<br>
-<strong>Avg. in LA County (geom.):</strong> {{ GeoAvgBeachTime | digit0_format }} Min.<br>
+</section>
+<section id="chosen-neighborhood-properties-with-premiums-and-discounts" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="chosen-neighborhood-properties-with-premiums-and-discounts"><span class="header-section-number">3</span> Chosen Neighborhood Properties with Premiums and Discounts</h2>
+<p>In several aspect the chosen neighborhood is superior or inferior compared to the average of LA County. This results in a <em>Premium (+)</em>/<em>Discount (-)</em></p>
+<section id="drive-time-to-the-next-beach-in-minutes" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="drive-time-to-the-next-beach-in-minutes"><span class="header-section-number">3.1</span> Drive Time to the Next Beach in Minutes</h3>
+<p><strong>Drive time from the selected neighborhood to the beach:</strong> {{ BeachTime | comma_format }} Min.<br>
+<strong>Avg. in LA County (geom.):</strong> {{ GeoAvgBeachTime | comma_format }} Min.<br>
 <strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> {{ SHAPBeachTimeLN | currency_format }}</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>School Quality Index 0 (worst) – 100 (best)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>School Quality Index for the selected neighborhood:</strong> {{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }}<br>
-<strong>Avg. in LA County:</strong> {{ (((AvgSchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }}<br>
+</section>
+<section id="school-quality-index-0-worst-100-best" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="school-quality-index-0-worst-100-best"><span class="header-section-number">3.2</span> School Quality Index 0 (worst) – 100 (best)</h3>
+<p><strong>School Quality Index for the selected neighborhood:</strong> {{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | comma_format }}<br>
+<strong>Avg. in LA County:</strong> {{ (((AvgSchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | comma_format }}<br>
 <strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> {{ SHAPSchoolQuality | currency_format }}</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Median Income
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
+</section>
+<section id="median-income" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="median-income"><span class="header-section-number">3.3</span> Median Income</h3>
 <p><strong>Median Income for the selected neighborhood:</strong> {{ MedIncome | currency_format }}<br>
 <strong>Avg. in LA County:</strong> {{ AvgMedIncome | currency_format }}<br>
 <strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> {{ SHAPMedIncome | currency_format }}</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Restaurants per Square Mile
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Restaurants per Square Mile (2024) for the selected neighborhood:</strong> {{ RestaurantsPerSqMile | digit0_format }}<br>
-<strong>Avg. in LA County:</strong> {{ AvgRestaurantsPerSqMile | digit0_format }}<br>
-<strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> {{ SHAPRestaurantsPerSqMile | currency_format }}</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Crimes per Square Mile
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Crimes per Square Mile (2024) for the selected neighborhood:</strong> {{ CrimesPerSqMile | digit2_format }}<br>
-<strong>Avg. in LA County:</strong> {{ AvgCrimesPerSqMile | digit0_format }}<br>
-<strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> {{ SHAPCrimesPerSqMile | currency_format }}</p>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Distance to the Closest Major Park
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><strong>Distance to Park from the selected neighborhood:</strong> {{ (DistParksMeters * 0.000621371) | digit0_format }} miles<br>
-<strong>Avg. in LA County:</strong> {{ (AvgDistParksMeters * 0.000621371) | digit0_format }} miles<br>
-<strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> {{ SHAPDistParksMetersLN | currency_format }}</p>
-</div>
-</div>
-</div>
 </section>
-<section id="acknowlegements" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="acknowlegements"><span class="header-section-number">3</span> Acknowlegements</h2>
+<section id="restaurants-per-square-mile" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="restaurants-per-square-mile"><span class="header-section-number">3.4</span> Restaurants per Square Mile</h3>
+<p><strong>Restaurants per Square Mile (2024) for the selected neighborhood:</strong> {{ RestaurantsPerSqMile | comma_format }}<br>
+<strong>Avg. in LA County:</strong> {{ AvgRestaurantsPerSqMile | comma_format }}<br>
+<strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> {{ SHAPRestaurantsPerSqMile | currency_format }}</p>
+</section>
+<section id="crimes-per-square-mile" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="crimes-per-square-mile"><span class="header-section-number">3.5</span> Crimes per Square Mile</h3>
+<p><strong>Crimes per Square Mile (2024) for the selected neighborhood:</strong> {{ CrimesPerSqMile | comma_format }}<br>
+<strong>Avg. in LA County:</strong> {{ AvgCrimesPerSqMile | comma_format }}<br>
+<strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> {{ SHAPCrimesPerSqMile | currency_format }}</p>
+</section>
+<section id="distance-to-the-closest-major-park" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="distance-to-the-closest-major-park"><span class="header-section-number">3.6</span> Distance to the Closest Major Park</h3>
+<p><strong>Distance to Park from the selected neighborhood:</strong> {{ (DistParksMeters * 0.000621371) | comma_format }} miles<br>
+<strong>Avg. in LA County:</strong> {{ (AvgDistParksMeters * 0.000621371) | comma_format }} miles<br>
+<strong>Resulting <em>Premium (+)</em>/<em>Discount (-)</em>:</strong> {{ SHAPDistParksMetersLN | currency_format }}</p>
+</section>
+</section>
+<section id="summary" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="summary"><span class="header-section-number">4</span> Summary</h2>
+</section>
+<section id="acknowlegements" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="acknowlegements"><span class="header-section-number">5</span> Acknowlegements</h2>
 <p>A big thank you to my students from EC 4448 Spatial Econometrics for supporting me with generating the spatial variables from various resourses. Special thanks go to Bryan Campuzano-Serrano, Xavier Padilla, Donald Young.</p>
 </section>
 

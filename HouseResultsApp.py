@@ -3,6 +3,7 @@ import math
 import pandas as pd
 import joblib
 from sklearn.model_selection import train_test_split
+from markupsafe import Markup
 
 
 app = Flask(__name__)
@@ -11,10 +12,31 @@ app = Flask(__name__)
 def home():
     return redirect(url_for("choose_features"))
 
-@app.template_filter('comma_format')
-def comma_format(value):
+
+
+
+@app.template_filter('currency_format')
+def currency_format(value):
+    try:
+        val = float(value)
+        if val < 0:
+            # Wrap negative numbers in a span with a red style and flag it as safe HTML
+            return Markup(f'<span style="color: red;">-${abs(val):,.0f}</span>')
+        return f"${val:,.0f}"
+    except (ValueError, TypeError):
+        return value
+
+@app.template_filter('digit0_format')
+def digit0_format(value):
     try:
         return f"{float(value):,.0f}"
+    except (ValueError, TypeError):
+        return value
+
+@app.template_filter('digit2_format')
+def digit2_format(value):
+    try:
+        return f"{float(value):,.2f}"
     except (ValueError, TypeError):
         return value
 
@@ -29,7 +51,7 @@ def choose_features():
         return redirect(url_for('FctSHAPResults', **existing_params))
     
     # Step 1: Otherwise, generate choices and show the user the form
-    SqftChoices = list(range(1000, 4501, 200))
+    SqftChoices = list(range(800, 4501, 100))
     BedroomChoices = list(range(1, 7))
     
     # Render using the standalone template file from the templates folder

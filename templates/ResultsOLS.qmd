@@ -20,26 +20,77 @@ execute:
 
 ::: {.callout-note appearance="simple" icon=false}
 <span style="font-size: 0.85em;">
-**Disclaimer:** This is research in progress. Estimates are based on data from 2024 adjusted to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions because they are based on only few observable variables. Individual house prperties are not observable through a computer estimate and they are therefor not considered.
+**Disclaimer:** This is research in progress. Estimates are based on data from 2024 adjusted to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions because they are based on only few observable variables. Only houses below $3,000,000 were considered because higher priced houses crucially depend on individual properties Therefore, predictions for high priced houses are less relaible. 
 </span>
 :::
 
-## Introduction
 
-Only houses below $3,000,000 were considered because higher priced houses crucially depend on individual properties that are not obsevable with out a house inspection. This means that predictions for high price houses are less relaible. (todo: check Crime)
 
-## Summary/Predicted Price:
+
+
+## At a Glance
 
 The house properties and the neighborhood you chose results in an estimated price of:
 
-**Predicted Price:** ${{ PredPrice | comma_format }}\
-**Avg. Price in LA County:**  ${{ SHAPBaseValue | comma_format }}\
-**Control Avg Price:** ${{ AvgPrice | comma_format }}
+```{=html}
+<table class="table table-bordered table-striped" style="max-width: 600px; margin: auto;">
+  <thead>
+    <tr>
+      <th style="text-align: right;"><strong>Avg. Price in LA County: </strong></th>
+      <th style="text-align: right;">{{ SHAPBaseValue | currency_format }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td></td>
+      <td style="text-align: right;"><strong>Premium(+)/Discount(-)</strong></td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>House Scale/Layout</strong> (Bedrooms: {{ Bedrooms }}, Sqft: {{ Sqft | digit0_format }})</td>
+      <td style="text-align: right;">{{ SHAPPCA1PCA2 | currency_format }}</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Beach Drive Time</strong> ({{ BeachTime  | digit0_format }} Min.)</td>
+      <td style="text-align: right;">{{ SHAPBeachTimeLN | currency_format }}</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>School Quality Index</strong> ({{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }} of 100)</td>
+      <td style="text-align: right;">{{ SHAPSchoolQuality | currency_format }}</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Median Income</strong> ({{ MedIncome  | currency_format }} in Neighborhood)</td>
+      <td style="text-align: right;">{{ SHAPMedIncome | currency_format }}}</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Restaurants per Square Mile</strong> ({{ RestaurantsPerSqMile  | digit2_format }} per Sq. Mile in Neighborhood)</td>
+      <td style="text-align: right;">{{ SHAPRestaurantsPerSqMile | currency_format }}</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Crimes per Square Mile</strong> ({{ CrimesPerSqMile  | digit2_format }} per Sq. Mile in Neighborhood)</td>
+      <td style="text-align: right;">{{ SHAPCrimesPerSqMile | currency_format }}</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Distance to the Closest Major Park</strong> ({{ (DistParksMeters * 0.000621371) | digit0_format }} miles)</td>
+      <td style="text-align: right;">{{ SHAPDistParksMetersLN  | currency_format }}</td>
+    </tr>
+    <tr>
+      <th style="text-align: right;"><strong>Predicted Price: </strong></th>
+      <th style="text-align: right;">{{ PredPrice | currency_format }}</th>
+    </tr>
+    
+  </tbody>
+</table>
+```
 
 
 
 
-## Chosen House Properties with Premiums and Discounts
+## Detailed Report
+
+The detailed report features will be fianlized soon and they are currently in the stae of *work in progress*.
+
+::: {.callout-note collapse="true"}
+### House Scale and Layout
 
 Since Sqft and the number of Bedrooms are closly related only their joint impact can be quantified.
  A so called Principal Component Analysis was used the quantify their joined **total impact** on the house price.
@@ -47,59 +98,68 @@ Since Sqft and the number of Bedrooms are closly related only their joint impact
 In many (but not all) cases one of the principa components represesets the **Scale:**, the "bigness" of the house while the other principal componente represents the **Layout (ratio between sqft and bedrooms)**. 
 
 
-### Chosen Values
+
 
 You have chosen a house with the following properties:
 
-**Sqft:** {{ Sqft | comma_format }}\
-**Avg. in LA County:**  {{ AvgSqft  | comma_format }}
+**Sqft:** {{ Sqft | digit0_format }}\
+**Avg. in LA County:**  {{ AvgSqft  | digit0_format }}
 
 **Number of Bedrooms:** {{ Bedrooms }}\
-**Avg. in LA County:** {{ AvgBedrooms  | comma_format }}
+**Avg. in LA County:** {{ AvgBedrooms  | digit0_format }}
 
-### Premium (+)/Discount (-)
+#### Premium (+)/Discount (-)
 
-The **total Premium (+)/Discount (-)** is: ${{ SHAPPCA1PCA2 | comma_format }}
+The **total Premium (+)/Discount (-)** is: {{ SHAPPCA1PCA2 | currency_format }}
 
-The first principal component (**Scale**) contributes ${{ SHAPPCA1 | comma_format }} while the second principal component  (**Layout**) contributes ${{ SHAPPCA2 | comma_format }}.
+The first principal component (**Scale**) contributes {{ SHAPPCA1 | currency_format }} while the second principal component  (**Layout**) contributes {{ SHAPPCA2 | currency_format }}.
+:::
 
-## Chosen Neighborhood Properties with Premiums and Discounts
-
-In several aspect the chosen neighborhood is superior or inferior compared to the average of LA County. This results in a *Premium (+)*/*Discount (-)*
-
+::: {.callout-note collapse="true"}
 ### Drive Time to the Next Beach in Minutes
 
-**Drive time from the selected neighborhood to the beach:** {{ BeachTime  | comma_format }} Min.\
-**Avg. in LA County (geom.):**  {{ GeoAvgBeachTime  | comma_format }} Min.\
-**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPBeachTimeLN | comma_format }}
+**Drive time from the selected neighborhood to the beach:** {{ BeachTime  | digit0_format }} Min.\
+**Avg. in LA County (geom.):**  {{ GeoAvgBeachTime  | digit0_format }} Min.\
+**Resulting *Premium (+)*/*Discount (-)*:** {{ SHAPBeachTimeLN | currency_format }}
+:::
 
+::: {.callout-note collapse="true"}
 ### School Quality Index 0 (worst) -- 100 (best)
 
-**School Quality Index for the selected neighborhood:** {{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | comma_format }}\
-**Avg. in LA County:**  {{ (((AvgSchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | comma_format }}\
-**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPSchoolQuality | comma_format }}
+**School Quality Index for the selected neighborhood:** {{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }}\
+**Avg. in LA County:**  {{ (((AvgSchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }}\
+**Resulting *Premium (+)*/*Discount (-)*:** {{ SHAPSchoolQuality | currency_format }}
+:::
 
+::: {.callout-note collapse="true"}
 ### Median Income
-**Median Income for the selected neighborhood:** {{ MedIncome  | comma_format }}\
-**Avg. in LA County:**  {{ AvgMedIncome  | comma_format }}\
-**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPMedIncome | comma_format }}
+**Median Income for the selected neighborhood:** {{ MedIncome  | currency_format }}\
+**Avg. in LA County:**  {{ AvgMedIncome  | currency_format }}\
+**Resulting *Premium (+)*/*Discount (-)*:** {{ SHAPMedIncome | currency_format }}
+:::
 
+::: {.callout-note collapse="true"}
 ### Restaurants per Square Mile
-**Restaurants per Square Mile (2024) for the selected neighborhood:** {{ RestaurantsPerSqMile  | comma_format }}\
-**Avg. in LA County:**  {{ AvgRestaurantsPerSqMile  | comma_format }}\
-**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPRestaurantsPerSqMile | comma_format }}
+**Restaurants per Square Mile (2024) for the selected neighborhood:** {{ RestaurantsPerSqMile  | digit0_format }}\
+**Avg. in LA County:**  {{ AvgRestaurantsPerSqMile  | digit0_format }}\
+**Resulting *Premium (+)*/*Discount (-)*:** {{ SHAPRestaurantsPerSqMile | currency_format }}
+:::
 
+::: {.callout-note collapse="true"}
 ### Crimes per Square Mile
-**Crimes per Square Mile (2024) for the selected neighborhood:** {{ CrimesPerSqMile  | comma_format }}\
-**Avg. in LA County:**  {{ AvgCrimesPerSqMile  | comma_format }}\
-**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPCrimesPerSqMile | comma_format }}
+**Crimes per Square Mile (2024) for the selected neighborhood:** {{ CrimesPerSqMile  | digit2_format }}\
+**Avg. in LA County:**  {{ AvgCrimesPerSqMile  | digit0_format }}\
+**Resulting *Premium (+)*/*Discount (-)*:** {{ SHAPCrimesPerSqMile | currency_format }}
+:::
 
+::: {.callout-note collapse="true"}
 ### Distance to the Closest Major Park 
-**Distance to Park from the selected neighborhood:** {{ (DistParksMeters * 0.000621371) | comma_format }} miles\
-**Avg. in LA County:**  {{ (AvgDistParksMeters  * 0.000621371) | comma_format }} miles\
-**Resulting *Premium (+)*/*Discount (-)*:** ${{ SHAPDistParksMetersLN  | comma_format }}
+**Distance to Park from the selected neighborhood:** {{ (DistParksMeters * 0.000621371) | digit0_format }} miles\
+**Avg. in LA County:**  {{ (AvgDistParksMeters  * 0.000621371) | digit0_format }} miles\
+**Resulting *Premium (+)*/*Discount (-)*:** {{ SHAPDistParksMetersLN  | currency_format }}
+:::
 
-## Summary
+
  
 ## Acknowlegements
 

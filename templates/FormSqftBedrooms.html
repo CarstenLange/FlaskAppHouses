@@ -2,36 +2,161 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Crucial for mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select House Features</title>
+    <style>
+        :root {
+            --primary-color: #2b6cb0;
+            --primary-hover: #1a528d;
+            --bg-color: #f7fafc;
+            --card-bg: #ffffff;
+            --text-color: #2d3748;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #1a202c;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .instruction-text {
+            font-size: 0.95rem;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: #fff;
+            box-sizing: border-box;
+            appearance: none; /* Removes default native arrow to style consistently */
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            cursor: pointer;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        /* Desktop Adjustments */
+        @media (min-width: 768px) {
+            body {
+                padding: 40px;
+            }
+            .container {
+                padding: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Select House Specifications</h2>
 
-    Please enter the square-fottage and the number of bedrooms in the form below
-    and then hit the <it>Submit Specifications</it> button to generate the rort for the chosen house in the previously chosen neighborhood.
+    <div class="container">
+        <h2>Select House Specifications</h2>
 
-    <form method="GET" action="/EnterHouseVars">
-        {% for key, val in existing_params.items() %}
-            <input type="hidden" name="{{ key }}" value="{{ val }}">
-        {% endfor %}
+        <p class="instruction-text">
+            Please enter the square-footage and the number of bedrooms in the form below 
+            and then hit the <em>Submit Specifications</em> button to generate the report for the chosen house in the previously chosen neighborhood.
+        </p>
 
-        <label for="Sqft">Square Footage:</label>
-        <select name="Sqft" id="Sqft">
-            {% for size in SqftChoices %}
-                <option value="{{ size }}">{{ size }} Sqft</option>
+        <form method="GET" action="/EnterHouseVars">
+            {% for key, val in existing_params.items() %}
+                <input type="hidden" name="{{ key }}" value="{{ val }}">
             {% endfor %}
-        </select>
-        <br><br>
 
-        <label for="Bedrooms">Bedrooms:</label>
-        <select name="Bedrooms" id="Bedrooms">
-            {% for num in BedroomChoices %}
-                <option value="{{ num }}">{{ num }}</option>
-            {% endfor %}
-        </select>
-        <br><br>
+            <div class="form-group">
+                <label for="Sqft">Square Footage</label>
+                <select name="Sqft" id="Sqft">
+                    {% for size in SqftChoices %}
+                        <option value="{{ size }}">{{ size }} Sqft</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <button type="submit">Submit Specifications</button>
-    </form>
+            <div class="form-group">
+                <label for="Bedrooms">Bedrooms</label>
+                <select name="Bedrooms" id="Bedrooms">
+                    {% for num in BedroomChoices %}
+                        <option value="{{ num }}">{{ num }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit">Submit Specifications</button>
+        </form>
+    </div>
+
 </body>
 </html>
