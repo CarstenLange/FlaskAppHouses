@@ -168,9 +168,9 @@ Data Source: @@@
 
 
  
-## Acknowlegements
+## Acknowledgements
 
-A big thank you to my students from EC 4448 Spatial Econometrics for supporting me with generating the spatial variables from various resourses. Special thanks go to Bryan Campuzano-Serrano, Xavier Padilla, Donald Young.
+A big thank you to my students from EC 4448 Spatial Econometrics for supporting me with generating the spatial variables from various resources. Special thanks go to Bryan Campuzano-Serrano, Xavier Padilla, Donald Young.
 
 
 
