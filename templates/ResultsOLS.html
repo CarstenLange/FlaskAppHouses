@@ -2276,7 +2276,7 @@ vertical-align: -.125em;
 </section>
 <section id="detailed-report" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="detailed-report"><span class="header-section-number">2</span> Detailed Report</h2>
-<p>The detailed report features will be finalized soon and they are currently in the stae of <em>work in progress</em>.</p>
+<p>The detailed report features will be finalized soon and they are currently in the state of <em>work in progress</em>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -2295,7 +2295,7 @@ vertical-align: -.125em;
 <strong>Sqft::</strong> {{ AvgSqft | digit0_format }}, <strong>Number of Bedrooms:</strong> {{ AvgBedrooms | digit0_format }}</p>
 <p><em>Sqft</em> and number of <em>Bedrooms</em> are closely correlated. Therefore, it is not possible to isolate each variables influence on the housing price. To still consider both variates they were transformed in two uncorrelated <a href="https://aashu-aggarwal.medium.com/from-scattered-to-simple-how-pca-finds-order-in-data-chaos-d5d46e371a71" target="_blank"><strong>Principle Components</strong></a> . Cumulatively <em>Sqft</em> and <em>Bedrooms</em> result in a<br>
 <strong>Total SHAP Premium(+)/ Discount (-) of {{ SHAPPCA1PCA2 | currency_format }}</strong></p>
-<p>In many (but not all!) cases the <strong>first Principal Component’s SHAP Value (({{ SHAPPCA1 | currency_format }} ))</strong> represents the premium(+)/discount(-) for the <strong>Scale</strong> (the “bigness”) of a house, while the <strong>second Principal Component’s SHAP Value ({{ SHAPPCA2 | currency_format }})</strong> represents the premium(+)/discount(-) for the <strong>Layout</strong> (ratio between sqft and bedrooms) of a house.</p>
+<p>In many (but not all!) cases the <strong>first Principal Component’s SHAP Value ({{ SHAPPCA1 | currency_format }} )</strong> represents the premium(+)/discount(-) for the <strong>Scale</strong> (the “bigness”) of a house, while the <strong>second Principal Component’s SHAP Value ({{ SHAPPCA2 | currency_format }})</strong> represents the premium(+)/discount(-) for the <strong>Layout</strong> (ratio between sqft and bedrooms) of a house.</p>
 <p><strong>Note:</strong> an average sized house will result in small <em>SHAP</em> Premiums(+)/Discounts(-), but due to the non-linear nature of the <a href="https://example.com" target="_blank"><em>Gradient Boosting Trees</em></a> algorithm, <em>SHAP</em> values will not be zero.</p>
 </div>
 </div>

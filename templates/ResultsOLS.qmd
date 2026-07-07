@@ -90,7 +90,7 @@ Cumulatively, all premiums and discounts  explain the difference between an aver
 
 ## Detailed Report
 
-The detailed report features will be finalized soon and they are currently in the stae of *work in progress*.
+The detailed report features will be finalized soon and they are currently in the state of *work in progress*.
 
 ::: {.callout-note collapse="true"}
 ### House Scale and Layout
@@ -105,7 +105,7 @@ An average house in Los Angeles County has the following properties:\
 *Sqft* and number of *Bedrooms* are closely correlated. Therefore, it is not possible to isolate each variables influence on the housing price. To still consider both variates they were transformed in two uncorrelated [**Principle Components**](https://aashu-aggarwal.medium.com/from-scattered-to-simple-how-pca-finds-order-in-data-chaos-d5d46e371a71){target="_blank"} . Cumulatively  *Sqft* and *Bedrooms* result in a\
 **Total SHAP Premium(+)/ Discount (-) of {{ SHAPPCA1PCA2 | currency_format }}**
 
-In many (but not all!) cases  the **first Principal Component's SHAP Value (({{ SHAPPCA1 | currency_format }} ))** represents the premium(+)/discount(-)  for the **Scale** (the "bigness") of a house, while the **second Principal Component's SHAP Value ({{ SHAPPCA2 | currency_format }})** represents the premium(+)/discount(-) for the **Layout** (ratio between sqft and bedrooms) of a house.
+In many (but not all!) cases  the **first Principal Component's SHAP Value ({{ SHAPPCA1 | currency_format }} )** represents the premium(+)/discount(-)  for the **Scale** (the "bigness") of a house, while the **second Principal Component's SHAP Value ({{ SHAPPCA2 | currency_format }})** represents the premium(+)/discount(-) for the **Layout** (ratio between sqft and bedrooms) of a house.
 
 **Note:** an average sized house will result in small *SHAP* Premiums(+)/Discounts(-), but due to the non-linear nature of the [*Gradient Boosting Trees*](https://example.com){target="_blank"} algorithm, *SHAP* values will not be zero.
 :::
