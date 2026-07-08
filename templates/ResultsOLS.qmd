@@ -1,5 +1,5 @@
 ---
-title: "House Price Prediction and Estimates for Contributing Components (currently Tree)"
+title: "House Price Prediction With Contributing Factors"
 author: 
   name: "Carsten Lange"
   affiliation: "California State Polytechnic University, Pomona"
@@ -20,7 +20,7 @@ execute:
 
 ::: {.callout-note appearance="simple" icon=false}
 <span style="font-size: 0.85em;">
-**Disclaimer:** This is research in progress. Estimates are based on data from 2024 adjusted to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions because they are based on only few observable variables. Only houses below $3,000,000 were considered because higher priced houses crucially depend on individual properties Therefore, predictions for high priced houses are less relaible. 
+**Disclaimer:** This is research in progress. Estimates are based on data from 2024 and are adjusted to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions. Only houses below $3,000,000 were considered because higher priced houses crucially depend on individual properties Therefore, predictions for high priced houses are less reliable.The same is true for houses with a very low price. 
 </span>
 :::
 
@@ -30,7 +30,10 @@ execute:
 
 ## At a Glance
 
-The house properties and the neighborhood you chose results in an estimated price of:
+Based on your chosen house size and location  a machine learning [**Gradient Boosting Trees**](https://ai.lange-analytics.com/htmlbook/TreeBased.html){target="_blank"}  model was used to predict the house price. 
+
+Afterward, a game theory based algorithm [**SHAP**](https://ai.lange-analytics.com/htmlbook/Interpret.html#Interpret-Shap) was used to calculate premiums and discounts to be paid for the presence or lack of certain amenities. 
+Cumulatively, all premiums and discounts  explain the difference between an average house in Los Angeles County and the predicted house price.
 
 ```{=html}
 <table class="table table-bordered table-striped" style="max-width: 600px; margin: auto;">
@@ -87,48 +90,52 @@ The house properties and the neighborhood you chose results in an estimated pric
 
 ## Detailed Report
 
-The detailed report features will be fianlized soon and they are currently in the stae of *work in progress*.
+The detailed report features will be finalized soon and they are currently in the state of *work in progress*.
 
 ::: {.callout-note collapse="true"}
 ### House Scale and Layout
 
-Since Sqft and the number of Bedrooms are closly related only their joint impact can be quantified.
- A so called Principal Component Analysis was used the quantify their joined **total impact** on the house price.
+You are analyzing a house with the following properties:\
+**Sqft:** {{ Sqft | digit0_format }}, **Number of Bedrooms:** {{ Bedrooms }}
 
-In many (but not all) cases one of the principa components represesets the **Scale:**, the "bigness" of the house while the other principal componente represents the **Layout (ratio between sqft and bedrooms)**. 
+An average house in Los Angeles County has the following properties:\
+**Sqft::**  {{ AvgSqft  | digit0_format }},
+**Number of Bedrooms:** {{ AvgBedrooms  | digit0_format }}
 
+*Sqft* and number of *Bedrooms* are closely correlated. Therefore, it is not possible to isolate each variables influence on the housing price. To still consider both variates they were transformed in two uncorrelated [**Principle Components**](https://aashu-aggarwal.medium.com/from-scattered-to-simple-how-pca-finds-order-in-data-chaos-d5d46e371a71){target="_blank"} . Cumulatively  *Sqft* and *Bedrooms* result in a\
+**Total SHAP Premium(+)/ Discount (-) of {{ SHAPPCA1PCA2 | currency_format }}**
 
+In many (but not all!) cases  the **first Principal Component's SHAP Value ({{ SHAPPCA1 | currency_format }} )** represents the premium(+)/discount(-)  for the **Scale** (the "bigness") of a house, while the **second Principal Component's SHAP Value ({{ SHAPPCA2 | currency_format }})** represents the premium(+)/discount(-) for the **Layout** (ratio between sqft and bedrooms) of a house.
 
-
-You have chosen a house with the following properties:
-
-**Sqft:** {{ Sqft | digit0_format }}\
-**Avg. in LA County:**  {{ AvgSqft  | digit0_format }}
-
-**Number of Bedrooms:** {{ Bedrooms }}\
-**Avg. in LA County:** {{ AvgBedrooms  | digit0_format }}
-
-#### Premium (+)/Discount (-)
-
-The **total Premium (+)/Discount (-)** is: {{ SHAPPCA1PCA2 | currency_format }}
-
-The first principal component (**Scale**) contributes {{ SHAPPCA1 | currency_format }} while the second principal component  (**Layout**) contributes {{ SHAPPCA2 | currency_format }}.
+**Note:** an average sized house will result in small *SHAP* Premiums(+)/Discounts(-), but due to the non-linear nature of the [*Gradient Boosting Trees*](https://example.com){target="_blank"} algorithm, *SHAP* values will not be zero.
 :::
 
 ::: {.callout-note collapse="true"}
-### Drive Time to the Next Beach in Minutes
+### Drive Time to the Next Beach in Minutes and BeachTime SHAP Value
 
-**Drive time from the selected neighborhood to the beach:** {{ BeachTime  | digit0_format }} Min.\
-**Avg. in LA County (geom.):**  {{ GeoAvgBeachTime  | digit0_format }} Min.\
-**Resulting *Premium (+)*/*Discount (-)*:** {{ SHAPBeachTimeLN | currency_format }}
+From the selected house to the closest beach ({{ BeachName }}) the\
+**Drive time  is {{ BeachTime  | digit0_format }} Min.**\ 
+
+In Los Angeles County  the\ 
+**Average (geom.) DriveTime is {{ GeoAvgBeachTime  | digit0_format }} Min.**
+
+**The resulting Beach Time SHAP Premium (+)/Discount(-) is {{ SHAPBeachTimeLN | currency_format }}**
+
+**Note:** a house that with an average drive time to the next beach will result in small Beach Time *SHAP* Premium(+)/Discount(-). However, due to the non-linear nature of the [*Gradient Boosting Trees*](https://example.com){target="_blank"} algorithm, the *SHAP* value will not be zero.
 :::
 
 ::: {.callout-note collapse="true"}
-### School Quality Index 0 (worst) -- 100 (best)
+### School Quality Index and Resulting SHAP Premium (+)/Discount(-)
 
-**School Quality Index for the selected neighborhood:** {{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }}\
-**Avg. in LA County:**  {{ (((AvgSchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }}\
-**Resulting *Premium (+)*/*Discount (-)*:** {{ SHAPSchoolQuality | currency_format }}
+The school quality is measured with a School Quality index which is 100 for the best high school in Los Angeles County and 0 for the worst high school. 
+
+**High School Quality Index for the selected neighborhood (Census Tract):** {{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }}\
+**Average High School in Los Angeles County:**  {{ (((AvgSchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }}\
+**Resulting SHAP Premium (+)/Discount (-):** {{ SHAPSchoolQuality | currency_format }}
+
+**Note:** an average high school quality will result in small *SHAP* Premium(+)/Discounts(-), but due to the non-linear nature of the [*Gradient Boosting Trees*](https://example.com){target="_blank"} algorithm, *SHAP* values will not be zero.
+
+Data Source: @@@
 :::
 
 ::: {.callout-note collapse="true"}
@@ -161,9 +168,9 @@ The first principal component (**Scale**) contributes {{ SHAPPCA1 | currency_for
 
 
  
-## Acknowlegements
+## Acknowledgements
 
-A big thank you to my students from EC 4448 Spatial Econometrics for supporting me with generating the spatial variables from various resourses. Special thanks go to Bryan Campuzano-Serrano, Xavier Padilla, Donald Young.
+A big thank you to my students from EC 4448 Spatial Econometrics for supporting me with generating the spatial variables from various resources. Special thanks go to Bryan Campuzano-Serrano, Xavier Padilla, Donald Young.
 
 
 
