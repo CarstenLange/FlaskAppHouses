@@ -59,7 +59,7 @@ The house properties and the neighborhood you chose results in an estimated pric
     </tr>
     <tr>
       <td style="text-align: left;"><strong>Median Income</strong> ({{ MedIncome  | currency_format }} in Neighborhood)</td>
-      <td style="text-align: right;">{{ SHAPMedIncome | currency_format }}}</td>
+      <td style="text-align: right;">{{ SHAPMedIncome | currency_format }}</td>
     </tr>
     <tr>
       <td style="text-align: left;"><strong>Restaurants per Square Mile</strong> ({{ RestaurantsPerSqMile  | digit2_format }} per Sq. Mile in Neighborhood)</td>
