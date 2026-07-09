@@ -1,0 +1,24 @@
+.small-note {
+  max-width: 400px;               /* Shrinks the container width */
+  padding: 0.2em 0.8em 0.5em 0.8em; /* Reduced top padding (first value) */
+  margin: 1em 0;                  /* Adjusts spacing around the note */
+  border-left: 3px solid #6c757d; /* Gives it a clean note border */
+  background-color: #f8f9fa;      /* Subtle background tint */
+}
+
+/* Forces the text inside the nested callout to shrink */
+.small-note .callout, 
+.small-note .callout-body, 
+.small-note .callout-content,
+.small-note .callout p {
+  font-size: 0.72rem !important;   /* Noticeably smaller, crisp text */
+}
+
+/* Eliminates the built-in top spacing of the Quarto callout box */
+.small-note .callout {
+  margin-top: 0.27 !important;       /* Removes Bootstrap's top margin pushing it down */
+}
+
+.small-note .callout-body {
+  padding-top: 0 !important;      /* Shaves off the inner callout top padding */
+}

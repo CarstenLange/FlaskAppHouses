@@ -11,6 +11,7 @@ format:
     toc-depth: 3
     embed-resources: true
     smart: false
+    css: Results.css
 execute:
   message: false
   warning: false
@@ -139,11 +140,11 @@ School quality is expressed with an index. The index is 100 for the best high sc
 Data Source: @@@
 :::
 
-::: {.callout-note collapse="true"}
+::::: {.callout-note collapse="true"}
 ### Median Income
 
 
-**Median Incomr in the selected neighborhood (Census Tract) is:**\
+**Median Income in the selected neighborhood (Census Tract) is:**\
 {{ MedIncome  | currency_format }}
 
 **Average *Median Income  in Los Angeles County is:**/  {{ AvgMedIncome  | currency_format }}\
@@ -151,17 +152,32 @@ Data Source: @@@
 
 The *Premium (+)*/*Discount (-)* does not only reflect the direct effect of median income on house prices. It also includes unobserved house and neighborhood properties like repair status and amenities in the neighborhood that are correlated with income.
 
-::: {.callout-note collapse="false" style="font-size: 0.01em; border-left-width: 3px;"}
-<span style="font-size: 0.5em;">A house with a *Median Income* that equals the average in Los Angeles County  will have a small *SHAP* Premium(+)/Discounts(-), but due to the non-linear nature of the [*Gradient Boosting Trees*](https://example.com){target="_blank"} algorithm, the *SHAP* value will not be zero.</span>
+:::: {.small-note}
+::: {.callout-note collapse="false" style="border-left: 3px solid #6c757d;"}
+A house with a *Median Income* that equals the average in Los Angeles County will have a small *SHAP* Premium(+)/Discounts(-), but due to the non-linear nature of the [*Gradient Boosting Trees*](https://example.com){target="_blank"} algorithm, the *SHAP* value will not be zero.
 :::
-:::
+::::
+:::::
 
-::: {.callout-note collapse="true"}
+
+
+::::: {.callout-note collapse="true"}
 ### Restaurants per Square Mile
 **Restaurants per Square Mile (2024) for the selected neighborhood:** {{ RestaurantsPerSqMile  | digit0_format }}\
 **Avg. in LA County:**  {{ AvgRestaurantsPerSqMile  | digit0_format }}\
 **Resulting *Premium (+)*/*Discount (-)*:** {{ SHAPRestaurantsPerSqMile | currency_format }}
+
+:::: {.small-note}
+::: {.callout-note collapse="false" style="border-left-width: 3px;"}
+A house with a *Restaurants per Square Mile* that equals the average in Los Angeles County
+will have a small *SHAP* Premium(+)/Discounts(-) but due to the non-linear nature
+of the [*Gradient Boosting Trees*](https://example.com){target=
+} algorithm,
+the *SHAP* value will not be zero.
 :::
+::::
+
+:::::
 
 ::: {.callout-note collapse="true"}
 ### Crimes per Square Mile

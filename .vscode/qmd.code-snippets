@@ -1,0 +1,16 @@
+{
+  "Quarto Compact Small Note": {
+    "prefix": "smallnote",
+    "body": [
+      ":::: {.small-note}",
+      "::: {.callout-note collapse=\"false\" style=\"border-left-width: 3px;\"}",
+      "A house with a *${1:Type your varname here...}* that equals the average in Los Angeles County",
+      "will have a small *SHAP* Premium(+)/Discounts(-) but due to the non-linear nature",
+      "of the [*Gradient Boosting Trees*](https://example.com){target="_blank"} algorithm,",
+      "the *SHAP* value will not be zero.",
+      ":::",
+      "::::"
+    ],
+    "description": "Inserts a scaled-down compact callout note block."
+  },
+}
