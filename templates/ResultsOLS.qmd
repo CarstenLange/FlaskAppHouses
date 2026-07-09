@@ -135,7 +135,7 @@ School quality is expressed with an index. The index is 100 for the best high sc
 
 **Resulting SHAP Premium (+)/Discount (-):** {{ SHAPSchoolQuality | currency_format }}
 
-**Note:** a house with a Schhool Quality that equals the average in Los Angeles County  will have a small *SHAP* Premium(+)/Discounts(-), but due to the non-linear nature of the [*Gradient Boosting Trees*](https://example.com){target="_blank"} algorithm, the *SHAP* value will not be zero.
+**Note:** a house with a School Quality that equals the average in Los Angeles County  will have a small *SHAP* Premium(+)/Discounts(-), but due to the non-linear nature of the [*Gradient Boosting Trees*](https://example.com){target="_blank"} algorithm, the *SHAP* value will not be zero.
 
 Data Source: @@@
 :::
