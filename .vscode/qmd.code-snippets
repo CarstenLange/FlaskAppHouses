@@ -1,6 +1,6 @@
 {
   "Quarto Compact Small Note": {
-    "prefix": "smallnote",
+    "prefix": "clsmallnote",
     "body": [
       ":::: {.small-note}",
       "::: {.callout-note collapse=\"false\" style=\"border-left-width: 3px;\"}",

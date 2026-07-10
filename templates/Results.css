@@ -11,7 +11,7 @@
 .small-note .callout-body, 
 .small-note .callout-content,
 .small-note .callout p {
-  font-size: 0.72rem !important;   /* Noticeably smaller, crisp text */
+  font-size: 0.85rem !important;   /* Noticeably smaller, crisp text */
 }
 
 /* Eliminates the built-in top spacing of the Quarto callout box */
