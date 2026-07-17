@@ -21,17 +21,13 @@ execute:
 
 ::: {.callout-note appearance="simple" icon=false}
 <span style="font-size: 0.85em;">
-**Disclaimer:** This is research in progress. Estimates are based on data from 2024 and are adjusted to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions. Only houses below $3,000,000 were considered because higher priced houses crucially depend on individual properties Therefore, predictions for high priced houses are less reliable.The same is true for houses with a very low price. 
+**Disclaimer:** This is research in progress. Estimates are based on data from 2024 and are adjusted based on hte Case-Shiller-Index for Los Angeles County to reflect house price changes up to June 2026. The estimates give a guideline but they cannot provide precise predictions. Only houses below $3,000,000 were considered because higher priced houses crucially depend on individual properties Therefore, predictions for high priced houses are less reliable.The same is true for houses with a very low price. 
 </span>
 :::
 
-
-
-
-
 ## At a Glance
 
-Based on your chosen house size and location  a machine learning [**Gradient Boosting Trees**](https://ai.lange-analytics.com/htmlbook/TreeBased.html){target="_blank"}  model was used to predict the house price. 
+Based on your chosen house size and location  a machine learning algorithm ([**Gradient Boosting Trees**](https://ai.lange-analytics.com/htmlbook/TreeBased.html){target="_blank"})   was used to predict the house price. 
 
 Afterward, a game theory based algorithm [**SHAP**](https://ai.lange-analytics.com/htmlbook/Interpret.html#Interpret-Shap) was used to calculate premiums and discounts to be paid for the presence or lack of certain amenities. 
 Cumulatively, all premiums and discounts  explain the difference between an average house in Los Angeles County and the predicted house price.
@@ -47,7 +43,7 @@ Cumulatively, all premiums and discounts  explain the difference between an aver
   <tbody>
     <tr>
       <td></td>
-      <td style="text-align: right;"><strong>Premium(+)/Discount(-)</strong></td>
+      <td style="text-align: right;"><strong>Premium(+)<br>Discount(-)</strong></td>
     </tr>
     <tr>
       <td style="text-align: left;"><strong>House Scale/Layout</strong> (Bedrooms: {{ Bedrooms }}, Sqft: {{ Sqft | digit0_format }})</td>
@@ -58,7 +54,7 @@ Cumulatively, all premiums and discounts  explain the difference between an aver
       <td style="text-align: right;">{{ SHAPBeachTimeLN | currency_format }}</td>
     </tr>
     <tr>
-      <td style="text-align: left;"><strong>School Quality Index</strong> ({{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }} of 100)</td>
+      <td style="text-align: left;"><strong>School Quality Index</strong> ({{ ((SchoolQuality - 2407.7) / (2554.613 - 2407.7) * 100) | digit0_format }} in Neighborhood. LA County Avg.=100)</td>
       <td style="text-align: right;">{{ SHAPSchoolQuality | currency_format }}</td>
     </tr>
     <tr>
@@ -97,10 +93,10 @@ The detailed report features will be finalized soon and they are currently in th
 ### House Scale and Layout
 
 You are analyzing a house with the following properties:\
-**Sqft:** {{ Sqft | digit0_format }}, **Number of Bedrooms:** {{ Bedrooms }}
+**Sqft:** {{ Sqft | digit0_format }}, **Number of Bedrooms:** {{ Bedrooms | digit0_format }}
 
 An average house in Los Angeles County has the following properties:\
-**Sqft::**  {{ AvgSqft  | digit0_format }},
+**Sqft:**  {{ AvgSqft  | digit0_format }},
 **Number of Bedrooms:** {{ AvgBedrooms  | digit0_format }}
 
 *Sqft* and number of *Bedrooms* are closely correlated. Therefore, it is not possible to isolate each variables influence on the housing price. To still consider both variates they were transformed in two uncorrelated [**Principle Components**](https://aashu-aggarwal.medium.com/from-scattered-to-simple-how-pca-finds-order-in-data-chaos-d5d46e371a71){target="_blank"} . Cumulatively  *Sqft* and *Bedrooms* result in a\
@@ -137,13 +133,14 @@ A house with a *Drive Time* to the next beach that equals the Los Angeles County
 ::: {.callout-note collapse="true"}
 ### School Quality Index and Resulting SHAP Premium (+)/Discount(-)
 
-School quality is expressed with an index. The index is 100 for the best high school in Los Angeles County and 0 for the worst high school. 
+School quality is expressed with an index. The index is 100 for the average school quality in Los Angeles County and 0 for the worst high school. 
 
 **School Quality for the nearest high school from the selected neighborhood (Census Tract):**\
-{{ (((SchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }}
+{{ ((SchoolQuality-2407.7)/(2555.681610302082-2407.7)*100) | digit1_format }}
 
 **Average School Quality in Los Angeles County:**\
-{{ (((AvgSchoolQuality - 2407.70) / (2784.40 - 2407.70)) * 100) | digit0_format }}
+{{ ((AvgSchoolQuality-2407.7)/(2555.681610302082-2407.7)*100) | digit1_format }}
+
 
 **Resulting SHAP Premium (+)/Discount (-):**\
 {{ SHAPSchoolQuality | currency_format }}
@@ -219,7 +216,7 @@ the *SHAP* value will not be zero.
 Locations for crimes committed during the year 2024 in Los Angeles County were used to generate estimates for crime density for one square mile raster cells. The density for the raster cell the house is within is reported below.
 Considered crimes include robbery, burglary, grand theft, and larceny theft.
 
-**Crimes per Square Mile in 2024 for the selected neighborhood (Census Tract):**/
+**Crimes per Square Mile in 2024 for the selected neighborhood (Census Tract):**\
 {{ CrimesPerSqMile  | digit2_format }}
 
 **Avg. Crimes per Square Mile in 2024  in Los Angeles County:**\
@@ -244,7 +241,7 @@ the *SHAP* value will not be zero.
 
 For the selected house the distance to the closest major park was calculated. Parks considered as *major* must have at least an area of 1 square kilometer (0.4 square miles).
 
-**Distance to Major Park from the selected neighborhood:**/
+**Distance to Major Park from the selected neighborhood:**\
 {{ (DistParksMeters * 0.000621371) | digit0_format }} miles
 
 **Avg. Distance to Major Park in Los Angeles County::**\

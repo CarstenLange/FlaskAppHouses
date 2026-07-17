@@ -33,6 +33,13 @@ def digit0_format(value):
     except (ValueError, TypeError):
         return value
 
+@app.template_filter('digit1_format')
+def digit1_format(value):
+    try:
+        return f"{float(value):,.1f}"
+    except (ValueError, TypeError):
+        return value
+
 @app.template_filter('digit2_format')
 def digit2_format(value):
     try:
