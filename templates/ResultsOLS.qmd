@@ -1,5 +1,6 @@
 ---
 title: "House Price Prediction With Contributing Factors"
+subtitle: "{{ CITY }} {{ CSA }}"
 author: 
   name: "Carsten Lange"
   affiliation: "California State Polytechnic University, Pomona"
@@ -27,9 +28,24 @@ execute:
 
 ## At a Glance
 
-Based on your chosen house size and location  a machine learning algorithm ([**Gradient Boosting Trees**](https://ai.lange-analytics.com/htmlbook/TreeBased.html){target="_blank"})   was used to predict the house price. 
+### House Price Prediction
 
-Afterward, a game theory based algorithm [**SHAP**](https://ai.lange-analytics.com/htmlbook/Interpret.html#Interpret-Shap) was used to calculate premiums and discounts to be paid for the presence or lack of certain amenities. 
+Based on your chosen house size ({{ Bedrooms }} bedrooms and {{ Sqft | digit0_format }} Sqft ) and your chosen location  ({{ CITY }} {{ CSA }}) a machine learning algorithm ([**Gradient Boosting Trees**](https://ai.lange-analytics.com/htmlbook/TreeBased.html){target="_blank"})   was used to predict the house price. 
+
+```{=html}
+<table class="table table-bordered table-striped" style="max-width: 600px; margin: auto;">
+  <thead>
+    <tr>
+      <th style="text-align: right;"><strong>Pred. Price: </strong></th>
+      <th style="text-align: right;">{{ PredPrice | currency_format }}</th>
+    </tr>
+  </thead> 
+</table>
+```
+
+### Contributing House Price Factors
+
+A game theory based algorithm ([**SHAP**](https://ai.lange-analytics.com/htmlbook/Interpret.html#Interpret-Shap)) was used to calculate premiums and discounts to be paid for the presence or lack of certain amenities. 
 Cumulatively, all premiums and discounts  explain the difference between an average house in Los Angeles County and the predicted house price.
 
 ```{=html}
@@ -46,7 +62,7 @@ Cumulatively, all premiums and discounts  explain the difference between an aver
       <td style="text-align: right;"><strong>Premium(+)<br>Discount(-)</strong></td>
     </tr>
     <tr>
-      <td style="text-align: left;"><strong>House Scale/Layout</strong> (Bedrooms: {{ Bedrooms }}, Sqft: {{ Sqft | digit0_format }})</td>
+      <td style="text-align: left;"><strong>House Scale/Layout</strong> (Bedrooms: {{ Bedrooms  | digit0_format }}, Sqft: {{ Sqft | digit0_format }})</td>
       <td style="text-align: right;">{{ SHAPPCA1PCA2 | currency_format }}</td>
     </tr>
     <tr>
@@ -70,7 +86,7 @@ Cumulatively, all premiums and discounts  explain the difference between an aver
       <td style="text-align: right;">{{ SHAPCrimesPerSqMile | currency_format }}</td>
     </tr>
     <tr>
-      <td style="text-align: left;"><strong>Distance to the Closest Major Park</strong> ({{ (DistParksMeters * 0.000621371) | digit0_format }} miles)</td>
+      <td style="text-align: left;"><strong>Distance to the Closest Major Park</strong> ({{ (DistParksMeters * 0.000621371) | digit1_format }} miles)</td>
       <td style="text-align: right;">{{ SHAPDistParksMetersLN  | currency_format }}</td>
     </tr>
     <tr>
@@ -85,22 +101,23 @@ Cumulatively, all premiums and discounts  explain the difference between an aver
 
 
 
-## Detailed Report
+## Report for a {{ Bedrooms }} Bedroom House with {{ Sqft | digit0_format }} Sqft in {{ CITY }} {{ CSA }}
 
-The detailed report features will be finalized soon and they are currently in the state of *work in progress*.
+Below is detailed information about the central variables that contribute to the predicted housing price.
 
 ::::: {.callout-note collapse="true"}
 ### House Scale and Layout
 
-You are analyzing a house with the following properties:\
-**Sqft:** {{ Sqft | digit0_format }}, **Number of Bedrooms:** {{ Bedrooms | digit0_format }}
+**Selected House Properties:**\
+Number of Bedrooms: {{ Bedrooms | digit0_format }}\
+Sqft: {{ Sqft | digit0_format }}
 
-An average house in Los Angeles County has the following properties:\
-**Sqft:**  {{ AvgSqft  | digit0_format }},
-**Number of Bedrooms:** {{ AvgBedrooms  | digit0_format }}
+**Average House in Los Angeles County:**\
+Number of Bedrooms: {{ AvgBedrooms  | digit0_format }}\
+Sqft:  {{ AvgSqft  | digit0_format }}
 
-*Sqft* and number of *Bedrooms* are closely correlated. Therefore, it is not possible to isolate each variables influence on the housing price. To still consider both variates they were transformed in two uncorrelated [**Principle Components**](https://aashu-aggarwal.medium.com/from-scattered-to-simple-how-pca-finds-order-in-data-chaos-d5d46e371a71){target="_blank"} . Cumulatively  *Sqft* and *Bedrooms* result in a\
-**Total SHAP Premium(+)/ Discount (-) of {{ SHAPPCA1PCA2 | currency_format }}**
+*Sqft* and the number of *Bedrooms* are closely correlated. Therefore, it is not possible to isolate each variable's influence on the housing price. To still consider both Bedrooms and Sqft they were transformed in two uncorrelated [**Principle Components**](https://aashu-aggarwal.medium.com/from-scattered-to-simple-how-pca-finds-order-in-data-chaos-d5d46e371a71){target="_blank"} . Cumulatively  *Sqft* and *Bedrooms* result in a\
+**Total SHAP Premium(+)/ Discount (-):**  {{ SHAPPCA1PCA2 | currency_format }}
 
 In many (but not all!) cases  the **first Principal Component's SHAP Value ({{ SHAPPCA1 | currency_format }} )** represents the premium(+)/discount(-)  for the **Scale** (the "bigness") of a house, while the **second Principal Component's SHAP Value ({{ SHAPPCA2 | currency_format }})** represents the premium(+)/discount(-) for the **Layout** (ratio between sqft and bedrooms) of a house.
 
@@ -114,14 +131,16 @@ An average sized house will result in small *SHAP* Premiums(+)/Discounts(-), but
 ::::: {.callout-note collapse="true"}
 ### Drive Time to the Next Beach in Minutes and BeachTime SHAP Value
 
-From the selected house to the closest beach ({{ BeachName }}) the\
-**Drive time  is {{ BeachTime  | digit0_format }} Min.**\ 
+A network algorithm was used to calculate the drive time in normal traffic to the closest beach.
 
-In Los Angeles County  the\
-**Average (geom.) Drive Time is {{ GeoAvgBeachTime  | digit0_format }} Min.**
+**Drive time from {{ CITY }} {{ CSA }} to the closest beach ({{ BeachName }}):**\
+{{ BeachTime  | digit0_format }} Min.
 
-**Resulting Beach Time SHAP Premium (+)/Discount(-) is\
-{{ SHAPBeachTimeLN | currency_format }}**
+**Average (geom.) drive time in Los Angeles County to the closest beach:**\
+{{ GeoAvgBeachTime  | digit0_format }} Min.
+
+**Resulting Beach Time SHAP Premium (+)/Discount(-):**\
+{{ SHAPBeachTimeLN | currency_format }}
 
 :::: {.small-note}
 ::: {.callout-note collapse="false" style="border-left-width: 3px;"}
@@ -135,7 +154,7 @@ A house with a *Drive Time* to the next beach that equals the Los Angeles County
 
 School quality is expressed with an index. The index is 100 for the average school quality in Los Angeles County and 0 for the worst high school. 
 
-**School Quality for the nearest high school from the selected neighborhood (Census Tract):**\
+**School Quality for the nearest high school from selected neighborhood in {{ CITY }} {{ CSA }}:**\
 {{ ((SchoolQuality-2407.7)/(2555.681610302082-2407.7)*100) | digit1_format }}
 
 **Average School Quality in Los Angeles County:**\
@@ -159,13 +178,13 @@ the *SHAP* value will not be zero.
 :::
 
 ::::: {.callout-note collapse="true"}
-### Median Income
+### Median Houshold Income
 
 
-**Median Income in the selected neighborhood (Census Tract) is:**\
+**Median Household Income in selected neighborhood in {{ CITY }} {{ CSA }}:**\
 {{ MedIncome  | currency_format }}
 
-**Average *Median Income*  in Los Angeles County is:**\
+**Average Median Household Income  in Los Angeles County:**\
 {{ AvgMedIncome  | currency_format }}
 
 **Resulting *Premium (+)*/*Discount (-)*:**\
@@ -189,11 +208,11 @@ The number of restaurants within a square mile serves as an indicator of a neigh
 
 Using data from existing restaurants across Los Angeles County, we calculated density estimates for one-square-mile grid cells. Below is the restaurant density for the specific area surrounding the selected house location.
 
-**Estimated Restaurants per Square Mile for the selected neighborhood (Census Tract):**\
-{{ RestaurantsPerSqMile  | digit0_format }}
+**Estimated Restaurants per Square Mile in selected neighborhood in {{ CITY }} {{ CSA }}:**\
+{{ RestaurantsPerSqMile  | digit2_format }}
 
 **Avg. Restaurants per Square Mile in Los Angeles County:**\
-{{ AvgRestaurantsPerSqMile  | digit0_format }}
+{{ AvgRestaurantsPerSqMile  | digit2_format }}
 
 **Resulting *Premium (+)*/*Discount (-)*:**\
 {{ SHAPRestaurantsPerSqMile | currency_format }}
@@ -216,11 +235,11 @@ the *SHAP* value will not be zero.
 Locations for crimes committed during the year 2024 in Los Angeles County were used to generate estimates for crime density for one square mile raster cells. The density for the raster cell the house is within is reported below.
 Considered crimes include robbery, burglary, grand theft, and larceny theft.
 
-**Crimes per Square Mile in 2024 for the selected neighborhood (Census Tract):**\
+**Crimes (2024) per Square Mile in selected neighborhood in {{ CITY }} {{ CSA }}:**\
 {{ CrimesPerSqMile  | digit2_format }}
 
-**Avg. Crimes per Square Mile in 2024  in Los Angeles County:**\
-{{ AvgCrimesPerSqMile  | digit0_format }}
+**Avg. Crimes  (2024) per Square Mile in Los Angeles County:**\
+{{ AvgCrimesPerSqMile  | digit2_format }}
 
 **Resulting *Premium (+)*/*Discount (-)*:**\
 {{ SHAPCrimesPerSqMile | currency_format }}
@@ -241,11 +260,11 @@ the *SHAP* value will not be zero.
 
 For the selected house the distance to the closest major park was calculated. Parks considered as *major* must have at least an area of 1 square kilometer (0.4 square miles).
 
-**Distance to Major Park from the selected neighborhood:**\
-{{ (DistParksMeters * 0.000621371) | digit0_format }} miles
+**Distance to the closest Major Park from {{ CITY }} {{ CSA }}:**\
+{{ (DistParksMeters * 0.000621371) | digit1_format }} miles
 
-**Avg. Distance to Major Park in Los Angeles County::**\
-{{ (AvgDistParksMeters  * 0.000621371) | digit0_format }} miles
+**Avg. Distance to a Major Park in Los Angeles County::**\
+{{ (AvgDistParksMeters  * 0.000621371) | digit1_format }} miles
 
 **Resulting *Premium (+)*/*Discount (-)*:**\
 {{ SHAPDistParksMetersLN  | currency_format }}

@@ -84,6 +84,10 @@ def FctSHAPResults():
     DictParams["Bedrooms"] = float(DictParams.get("Bedrooms", 8888888)) 
     BeachName = DictParams.get("BeachName", "NoBeach")
     DictParams.pop("BeachName")
+    CITY = DictParams.get("CITY", "NoCITY")
+    DictParams.pop("CITY")
+    CSA  = DictParams.get("CSA", "NoCSA")
+    DictParams.pop("CSA")
     DictParams["BeachTime"] = float(DictParams.get("BeachTime", 8888888))
     DictParams["BeachTimeLN"] = math.log(DictParams["BeachTime"])
     DictParams["SchoolQuality"] = float(DictParams.get("SchoolQuality", 8888888))
@@ -155,6 +159,8 @@ def FctSHAPResults():
         MedIncome=DictParams["MedIncome"],
         BeachTime=math.exp(DictParams["BeachTimeLN"]),
         BeachName=BeachName,
+        CITY=CITY,
+        CSA=CSA,
         RestaurantsPerSqMile=DictParams["RestaurantsPerSqMile"],
         CrimesPerSqMile=DictParams["CrimesPerSqMile"],
         DistParksMeters=DictParams["DistParksMeters"],
