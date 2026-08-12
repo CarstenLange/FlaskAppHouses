@@ -1,0 +1,46 @@
+---
+title: "A Location Based Hedonistic Maachine Learning Model to Predict the Impact Factors of House Price Estimates"
+format: html
+---
+
+## Introduction
+
+In the real estate industry when it comes to estimating house prices the saying goes that the three most important impact factors are location, location, and location. This statement is true as the location of a house is an important impact factor for its price. At the same time the saying is not true, because House buyers are not willing to pay for location per se. The relation between house prices and location is very indirect.  Perspective homeowners are willing to pay for amenities that come with a location such as a ocean view, a good school nearby, or a low crime rate.
+
+This brings us to hedonic house price models. The idea is to identify variables and data that are closely related to amenities a house price buyer is willing to pay for. These variables can be location based, such as driving distance from the house to the beach or park,school quality at the nearest highschool, or densitiesfor crimes and restaurants. Non-location-based variables include the size of the measured in square feet or the number of bedrooms.
+
+In a  hedonic model that reflect the price impact of all amenties, the rpice impact of all amenties would sum up to the estiated house price. Realisticly, for many amenties like the friendlyness of neighbors or the noice level at the location, data are not available. The cummanlitive influence of all these amenties would be reflected in the constant of a modell and the sum measurable amentiies would reflect the difference between th constat and the estimated price.
+
+The idea behind a hedonic model is not only to use variables that reflect amenties for estimating the price. A hedonic model, after the price is estimated must also identify the price impact of all its variable, i.e. all its amenties.
+
+To reach the prediction goal of a hedonic model and to quantify the impact factors the  analysis proceeds in three steps
+
+1. Geographic Information Systems are used to quantify location related variables for to each house record in the taining data set.
+
+2. A non-linear *Boosting Trees* machine learning model is used to predict housig prices based on non-location variables (house size and bedrooms) together with the location variables developed in the first step.The median prediction error based on withholded dta set that was not used to train the model is @@@@. A linear regression model with the same variables has an @@@% higher error. To ensure that the predictions are compatible with 2026 while the underlying data were from 2026 all predicted prices were multiplied with a factor of @@@ which is the increase of the Case-Shiller house price index from @@@ too@@@ (source:()) 
+
+3. SHAP-Values, a game-theory based algorithm is used to quantify the impact for each of the variables related to a benchmark (the average house value in Los Angeles County). The sum of theses impact factors explains the difference between the avergage house price in LA and the predicted price of an individual home. 
+
+## Data
+
+The following house based and location-based data were used:
+
+**House Based Variables:**\
+
+As a base dataset the *LA County Transaction* was used (source: ). I contains residential real estate transaction data for  all sales between 2024 and 2025. The following variables were utilized:
+- Property address
+- Transaction price in US dollars
+- Square footage 
+- Number of bedrooms
+The dataset was filtered to include only houses with a minimum price of @@@ and a maximum price below $3,000,000. The lower limit was used to make sure that the underlying transaction was done at an *arms length*@@@footnote. The upper limit was used because estimating high priced houses involves factors that are usually not publicly available. The remaining  @@@ real estate transaction records were enriched with location variables based on the property address.
+
+**Location Based Variables:**
+The geo-coding tool from the ESRI's ArcGIS Pro software was used to transform each sales record's propery address into latitude/longitude coordinates. Based on these coordinates the following location based variables were created.  
+
+**DriveTime** during normal traffic from each of the houses to the closest beach
+
+## Price Estimate
+
+## Impact Factors 
+
+## Application
