@@ -1,0 +1,60 @@
+---
+title: "Untitled"
+format: html
+---
+
+## Data Source
+
+Data are from LA
+
+**Total original records: 2,423,829 dating back to 1960**
+
+Then records were filtered 
+
+
+```{r}
+#| eval: false
+DataHouses=rbind(DataHousesPart1, DataHousesPart2, DataHousesPart3)|> 
+                clean_names("upper_camel") |> 
+                select(AIN=Ain, HouseNo=SitusHouseNo, Direction, Street=StreetName, 
+                       CityState,ZIP=Zip, 
+                       SaleVerifKey=LastSaleVerifKey, Price=LastSaleAmount, 
+                       LastSaleDate, 
+                       YearBuild=Bd1YearBuilt, Units=Bd1Units, 
+                       Bedrooms=Bd1Bedrooms, BathRooms=Bd1Baths, 
+                       Sqft=Bd1SquareFeet) |> 
+                       mutate(AIN=as.character(AIN),
+                              ZIP=as.character(ZIP),
+                              HouseNo=as.character(HouseNo),
+                              Bedrooms=as.numeric(Bedrooms),
+                              BathRooms=as.numeric(BathRooms),
+                              Sqft=as.numeric(Sqft),
+                              YearBuild=as.numeric(YearBuild),
+                              Units=as.numeric(Units),
+                              Price=as.numeric(Price),
+                              LastSaleDate=as.numeric(LastSaleDate),
+                              Direction=NULL) |> 
+                       mutate(Street=paste(HouseNo,Street, sep = " "),                                                          HouseNo=NULL) |> 
+                       mutate(CityState = str_trim(CityState, side = "right")) |> 
+                       mutate(City = if_else(str_sub(CityState, -3) == " CA", 
+                                            str_sub(CityState, 1, -4), 
+                                            CityState)) |> 
+                       mutate(State="CA", CityState=NULL) |> 
+                       mutate(SaleVerifKey=NULL)|>
+                       filter(ZIP!=0) |> 
+                       filter(Bedrooms>0) |>
+                       filter(Bedrooms<=6) |>
+                       filter(BathRooms>0) |>
+                       filter(BathRooms<5) |>
+                       filter(Sqft>=500) |>
+                       filter(Sqft<=5000) |>
+                       filter(YearBuild>1950) |>
+                       filter(Units==1) |>
+                       mutate(Units=NULL)|>
+                       filter(Price>200000) |> 
+                       filter(Price<3000000) |>
+                       filter(LastSaleDate>=20230000) |> 
+                       select(LastSaleDate, AIN, Street, City, State, ZIP, everything())
+```
+
+After filtering records were 31,322 records left ranging fromm beginning of 2023 to 2024-04-15
