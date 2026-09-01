@@ -2,20 +2,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Carsten Lange">
 
-<title>A Location Based Hedonistic Maachine Learning Model to Predict the Impact Factors of House Price Estimates</title>
+<title>A Location Based Hedonic Machine Learning Model to Predict the Impact Factors of House Price Estimates</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -33,10 +37,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="Paper_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="Paper_files/libs/quarto-html/anchor.min.js"></script>
 <link href="Paper_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Paper_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="Paper_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="Paper_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="Paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="Paper_files/libs/bootstrap/bootstrap-efbb37e9afcc02144ebbc7afd12a776f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="Paper_files/libs/bootstrap/bootstrap-215b371544c282197b31c8aa00ce3677.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
@@ -49,14 +53,27 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">A Location Based Hedonistic Maachine Learning Model to Predict the Impact Factors of House Price Estimates</h1>
+<h1 class="title">A Location Based Hedonic Machine Learning Model to Predict the Impact Factors of House Price Estimates</h1>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Carsten Lange <a href="mailto:clange@cpp.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Cal Poly, Pomona
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
   
     
   </div>
@@ -66,11 +83,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<section id="introduction" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
 <p>In the real estate industry when it comes to estimating house prices the saying goes that the three most important impact factors are location, location, and location. This statement is true as the location of a house is an important impact factor for its price. At the same time the saying is not true, because House buyers are not willing to pay for the location per se. Instead. the relation between house prices and location is indirect. Perspective homeowners are willing to pay for amenities that come with a location such as a ocean view, a good school nearby, or a low crime rate.</p>
 <p>This brings us to hedonic housing price models. The idea is to identify variables and data that are closely related to amenities a house price buyer is willing to pay for. These variables can be location based, such as driving distance from the house to the beach or park, school quality at the nearest highschool, or densities of crimes and restaurants. Non-location-based variables include the size of a house measured in square feet or the number of bedrooms. as they provide the amenities of space.</p>
-<p>In a hedonic model that reflect the price impact of all amenties, the rpice impact of all amenties would sum up to the estiated house price. Realisticly, for many amenties like the friendlyness of neighbors or the noice level at the location, data are not available. The cummanlitive influence of all these amenties would be reflected in the constant of a modell and the sum measurable amentiies would reflect the difference between th constat and the estimated price.</p>
+<p>In a hedonic model that reflect the price impact of all amenties, the rpice impact of all amenties would sum up to the estiated house price. Realisticly, for many amenties like the friendlyness of neighbors or the noice level at the location, data are not available. The cumulative influence of all these amenties would be reflected in the constant of a modell and the sum measurable amentiies would reflect the difference between th constat and the estimated price.</p>
 <p>The idea behind a hedonic model is not only to use variables that reflect amenties for estimating the price. A hedonic model, after the price is estimated must also identify the price impact of all its variable, i.e.&nbsp;all its amenties.</p>
 <p>To reach the prediction goal of a hedonic model and to quantify the impact factors the analysis proceeds in three steps</p>
 <ol type="1">
@@ -79,28 +96,36 @@ ul.task-list li input[type="checkbox"] {
 <li><p>SHAP-Values, a game-theory based algorithm is used to quantify the impact for each of the variables related to a benchmark (the average house value in Los Angeles County). The sum of theses impact factors explains the difference between the avergage house price in LA and the predicted price of an individual home.</p></li>
 </ol>
 </section>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
+<section id="data" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="data"><span class="header-section-number">2</span> Data</h2>
 <p>The following analysis is based on the <em>Secured Basic File Abstract</em> dataset from the <a href="https://assessor.lacounty.gov/real-estate-toolkit/data-sales"><em>Los Angeles County Assessor Office</em></a>. This core dataset was then enriched with location based data based on the property addresses.</p>
-<p><strong>House Based Variables:</strong><br>
-</p>
-<p>The original core dataset for the analysis included 2,423,829 sales from 6/1925 to 4/2024 with variables such as sales date and amount, square footage, year build, and number of bedrooms.</p>
-<p>The dataset was filtered to include only house sales after the beginning of th year 2023 with a minimum price of $200,000 and a maximum price below $3,000,000. The lower limit was used to make sure that the underlying transaction was done at an <em>Arms length</em>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The upper limit was used because estimating high priced houses involves factors that are usually not publicly available.</p>
+<section id="property-and-sales-records" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="property-and-sales-records"><span class="header-section-number">2.1</span> Property and Sales Records</h3>
+<p>The original core dataset for the analysis included 2,423,829 sales from 6/1925 to 4/2024 with variables such as sales dat, sales amount, square footage, year build, and number of bedrooms.</p>
+<p>The dataset was filtered to include only house sales after the beginning of the year 2023 with a minimum price of $200,000 and a maximum price below $3,000,000. The lower limit was used to make sure that the underlying transaction was done at an <em>Arms length</em>.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> The upper limit was used because estimating high priced houses involves factors that are usually not publicly available.</p>
 <p>For similar reasons houses with more than 5,000 square feet (or more than 6 bedrooms) where excluded together with houses with less than 500 square feet. Houses older than 1950 where also excluded because the value of <em>historic</em> houses varies significantly based on the condition of the house for which no data were available.</p>
 <p>The following variables were considered for the analysis: - Property address - Transaction price in US dollars - Square footage - Number of bedrooms - Year Build</p>
 <p>The variable <em>Year Build</em> was ultimately not used because the corelation to the house price was too low (-0.06; Pearson Correlation Coefficient).</p>
 <p>The remaining 31,321 real estate transaction records were enriched with location variables based on the property address.</p>
-<p><strong>Location Based Variables:</strong> The geo-coding tool from the ESRI’s ArcGIS Pro software was used to transform each sales record’s property address into latitude/longitude coordinates. Based on these coordinates the following location based variables were created.</p>
-<p><strong>DriveTime</strong> during normal traffic from each of the houses to the closest beach</p>
 </section>
-<section id="price-estimate" class="level2">
-<h2 class="anchored" data-anchor-id="price-estimate">Price Estimate</h2>
+<section id="location-based-variables" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="location-based-variables"><span class="header-section-number">2.2</span> Location Based Variables</h3>
+<p><strong>Property and Sales Records:</strong><br>
+Since this dataset contained property address the geo-coding tool from the ESRI’s ArcGIS Pro software was used to transform each sales record’s property address into latitude(lat/long) coordinates. These <strong>geo-coded sales data</strong> where then enriched with location data as follows.</p>
+<p><strong>Drive Time to the Closest Beach:</strong><br>
+The beaches of Los Angeles County and some close by beaches of Orange and Ventura County where geocoded with lat/long coordinates. The Network Analyst extension (Closest Facility) together with a street network layer was then used to find the closest beach in term of drive time during normal traffic from. The drive time to this closest beach was then assigned to each of the <em>Property and Sales Record</em>.</p>
+<p><strong>School Quality:</strong><br>
+School addresses for public high schools were downloaded from <a href="https://www.cde.ca.gov/ds/si/ds/pubschls.asp">California Department of Education</a> and based on the <em>County-District-School Code (CDC)</em> linked to the 2022/23 <a href="https://caaspp-elpac.ets.org/caaspp/ResearchFileListSB?ps=true&amp;lstTestYear=2023&amp;lstTestType=B&amp;lstCounty=19&amp;lstDistrict=00000&amp;lstFocus=b">California Assessment of Student Performance and Progress (CAASPP)</a> file that included the <em>Mean Performance Score</em> for each school. Since the school address file already included lat/long coordinates the <em>Near Tool</em> from ArcGiS Pro could be used to assign the nearest highschool together with its <em>Mean Performance Score</em> to each sales record.</p>
 </section>
-<section id="impact-factors" class="level2">
-<h2 class="anchored" data-anchor-id="impact-factors">Impact Factors</h2>
 </section>
-<section id="application" class="level2">
-<h2 class="anchored" data-anchor-id="application">Application</h2>
+<section id="price-estimate" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="price-estimate"><span class="header-section-number">3</span> Price Estimate</h2>
+</section>
+<section id="impact-factors" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="impact-factors"><span class="header-section-number">4</span> Impact Factors</h2>
+</section>
+<section id="application" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="application"><span class="header-section-number">5</span> Application</h2>
 </section>
 
 

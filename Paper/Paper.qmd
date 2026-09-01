@@ -1,6 +1,18 @@
 ---
 title: "A Location Based Hedonic Machine Learning Model to Predict the Impact Factors of House Price Estimates"
-format: html
+
+author:
+  name: "Carsten Lange"
+  email: "clange@cpp.edu"
+  affiliation: "California State Polytechnic University, Pomona"
+
+execute:
+  message: false
+  warning: false
+
+format:
+  pdf:
+    number-sections: true
 ---
 
 ## Introduction
@@ -9,13 +21,13 @@ In the real estate industry when it comes to estimating house prices the saying 
 
 This brings us to hedonic housing price models. The idea is to identify variables and data that are closely related to amenities a house price buyer is willing to pay for. These variables can be location based, such as driving distance from the house to the beach or park, school quality at the nearest highschool, or densities of crimes and restaurants. Non-location-based variables include the size of a house measured in square feet or the number of bedrooms. as they provide the amenities of space.
 
-In a  hedonic model that reflect the price impact of all amenties, the rpice impact of all amenties would sum up to the estiated house price. Realisticly, for many amenties like the friendlyness of neighbors or the noice level at the location, data are not available. The cummanlitive influence of all these amenties would be reflected in the constant of a modell and the sum measurable amentiies would reflect the difference between th constat and the estimated price.
+In a  hedonic model that reflect the price impact of all amenities, the price impact of all amenities would sum up to the estimated house price. Realistically, for many amenities like the friendliness of neighbors or the noise level at the location, data are not available. The cumulative influence of all these amenities would be reflected in the constant of a model and the sum measurable amenities would reflect the difference between the constant and the estimated price.
 
-The idea behind a hedonic model is not only to use variables that reflect amenties for estimating the price. A hedonic model, after the price is estimated must also identify the price impact of all its variable, i.e. all its amenties.
+The idea behind a hedonic model is not only to use variables that reflect amenities for estimating the price. A hedonic model, after the price is estimated must also identify the price impact of all its variable, i.e. all its amenities.
 
 To reach the prediction goal of a hedonic model and to quantify the impact factors the  analysis proceeds in three steps
 
-1. Geographic Information Systems are used to quantify location related variables for to each house record in the taining data set.
+1. Geographic Information Systems are used to quantify location related variables for to each house record in the training data set.
 
 2. A non-linear *Boosting Trees* machine learning model is used to predict housig prices based on non-location variables (house size and bedrooms) together with the location variables developed in the first step.The median prediction error based on withholded dta set that was not used to train the model is @@@@. A linear regression model with the same variables has an @@@% higher error. To ensure that the predictions are compatible with 2026 while the underlying data were from 2026 all predicted prices were multiplied with a factor of @@@ which is the increase of the Case-Shiller house price index from @@@ too@@@ (source:()) 
 
@@ -25,11 +37,11 @@ To reach the prediction goal of a hedonic model and to quantify the impact facto
 
 The following analysis is based on the *Secured Basic File Abstract* dataset from the [*Los Angeles County Assessor Office*](https://assessor.lacounty.gov/real-estate-toolkit/data-sales). This core dataset was then enriched with location based data based on the property addresses.
 
-**House Based Variables:**\
+### Property and Sales Records
 
-The original core dataset  for the analysis included  2,423,829 sales from 6/1925 to 4/2024 with variables such as sales date and amount, square footage, year build, and number of bedrooms. 
+The original core dataset  for the analysis included  2,423,829 sales from 6/1925 to 4/2024 with variables such as sales dat, sales amount, square footage, year build, and number of bedrooms. 
 
-The dataset was filtered to include only house sales after the beginning of th year 2023  with a minimum price of $200,000 and a maximum price below $3,000,000. The lower limit was used to make sure that the underlying transaction was done at an *Arms length*.^[An *Arms length* business deal assumes that buyer and seller are unrelated and act in their own best interest.  This type of sale has the best chances to reflect a true market price.] The upper limit was used because estimating high priced houses involves factors that are usually not publicly available.
+The dataset was filtered to include only house sales after the beginning of the year 2023  with a minimum price of $200,000 and a maximum price below $3,000,000. The lower limit was used to make sure that the underlying transaction was done at an *Arms length*.^[An *Arms length* business deal assumes that buyer and seller are unrelated and act in their own best interest.  This type of sale has the best chances to reflect a true market price.] The upper limit was used because estimating high priced houses involves factors that are usually not publicly available.
 
 For similar reasons houses  with more than 5,000 square feet (or more than 6 bedrooms) where excluded together with houses with less than 500 square feet. Houses older than 1950 where also excluded because the value of *historic* houses varies significantly based on the condition of the house for which no data were available. 
 
@@ -44,10 +56,16 @@ The variable *Year Build* was ultimately not used because the corelation to the 
 
 The remaining  31,321 real estate transaction records were enriched with location variables based on the property address.
 
-**Location Based Variables:**
-The geo-coding tool from the ESRI's ArcGIS Pro software was used to transform each sales record's property address into latitude/longitude coordinates. Based on these coordinates the following location based variables were created.  
+### Location Based Variables
 
-**DriveTime** during normal traffic from each of the houses to the closest beach
+ **Property and Sales Records:**\
+Since this dataset contained property address the geo-coding tool from the ESRI's ArcGIS Pro software was used to transform each sales record's property address into latitude/longitude (lat/long) coordinates. These **geo-coded  sales data**  where then enriched with location data as follows. 
+
+**Drive Time to the Closest Beach:** \
+The beaches of Los Angeles County and some close by beaches of Orange and Ventura County where geocoded with lat/long coordinates. The Network Analyst extension (Closest Facility) together with a street network layer was then used to find the closest beach in term of drive time during normal traffic from. The drive time to this closest beach was then assigned to each of the *Property and Sales Record*.
+
+**School Quality:**\
+School addresses for public high schools were downloaded from [California Department of Education](https://www.cde.ca.gov/ds/si/ds/pubschls.asp) and based on the *County-District-School Code (CDC)*  linked to the 2022/23 [California Assessment of Student Performance and Progress (CAASPP)](https://caaspp-elpac.ets.org/caaspp/ResearchFileListSB?ps=true&lstTestYear=2023&lstTestType=B&lstCounty=19&lstDistrict=00000&lstFocus=b) file that included the *Mean Performance Score* for each school. Since the school address file already included lat/long coordinates the *Near Tool* from ArcGiS Pro could be used to assign the nearest highschool together with its *Mean Performance Score* to each sales record. 
 
 ## Price Estimate
 
